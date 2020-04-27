@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.retrofit.model;
+package br.com.alloy.comanditcliente.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -16,7 +16,9 @@ public class Produto {
     private String ingredientesProdutoCardapio;
     @SerializedName("VALOR_PRODUTO")
     private BigDecimal valorProduto;
+    @SerializedName("ATIVO")
     private Boolean ativo;
+    @SerializedName("DISPONIVEL")
     private Boolean disponivel;
 
     public Integer getIdProduto() {

@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.retrofit.model;
+package br.com.alloy.comanditcliente.api.model;
 
 import com.google.gson.annotations.SerializedName;
 

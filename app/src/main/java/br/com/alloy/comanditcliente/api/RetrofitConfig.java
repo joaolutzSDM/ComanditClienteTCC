@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.retrofit;
+package br.com.alloy.comanditcliente.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

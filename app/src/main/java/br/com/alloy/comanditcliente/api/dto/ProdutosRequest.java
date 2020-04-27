@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.retrofit.dto;
+package br.com.alloy.comanditcliente.api.dto;
 
 public class ProdutosRequest {
 

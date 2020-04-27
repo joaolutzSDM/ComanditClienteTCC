@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.retrofit.model;
+package br.com.alloy.comanditcliente.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,6 +10,7 @@ public class ProdutoCategoria {
     private String nomeCategoria;
     @SerializedName("NOME_CATEGORIA_CARDAPIO")
     private String nomeCategoriaCardapio;
+    @SerializedName("ATIVO")
     private Boolean ativo;
 
     public Integer getIdProdutoCategoria() {
@@ -42,6 +43,16 @@ public class ProdutoCategoria {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    @Override
+    public String toString() {
+        return "ProdutoCategoria{" +
+                "idProdutoCategoria=" + idProdutoCategoria +
+                ", nomeCategoria='" + nomeCategoria + '\'' +
+                ", nomeCategoriaCardapio='" + nomeCategoriaCardapio + '\'' +
+                ", ativo=" + ativo +
+                '}';
     }
 
 }

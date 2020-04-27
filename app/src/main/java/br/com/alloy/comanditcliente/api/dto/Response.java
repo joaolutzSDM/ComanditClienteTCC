@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.retrofit.dto;
+package br.com.alloy.comanditcliente.api.dto;
 
 public class Response<T> {
 
@@ -37,6 +37,16 @@ public class Response<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "status=" + status +
+                ", mensagem='" + mensagem + '\'' +
+                ", sql='" + sql + '\'' +
+                ", data=" + data +
+                '}';
     }
 
 }

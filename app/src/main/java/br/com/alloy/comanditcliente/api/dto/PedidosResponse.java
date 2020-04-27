@@ -1,10 +1,8 @@
-package br.com.alloy.comanditcliente.retrofit.dto;
-
-import com.google.gson.annotations.SerializedName;
+package br.com.alloy.comanditcliente.api.dto;
 
 import java.util.List;
 
-import br.com.alloy.comanditcliente.retrofit.model.Pedido;
+import br.com.alloy.comanditcliente.api.model.Pedido;
 
 public class PedidosResponse extends Response<PedidosResponse> {
 
@@ -63,4 +61,15 @@ public class PedidosResponse extends Response<PedidosResponse> {
         this.valorTotalComServico = valorTotalComServico;
     }
 
+    @Override
+    public String toString() {
+        return "PedidosResponse{" +
+                "pedidos=" + pedidos +
+                ", valorTotalComanda='" + valorTotalComanda + '\'' +
+                ", comServico=" + comServico +
+                ", taxaServico='" + taxaServico + '\'' +
+                ", valorServico='" + valorServico + '\'' +
+                ", valorTotalComServico='" + valorTotalComServico + '\'' +
+                "} " + super.toString();
+    }
 }
