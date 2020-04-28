@@ -16,6 +16,9 @@ import java.util.List;
 import br.com.alloy.comanditcliente.api.RetrofitConfig;
 import br.com.alloy.comanditcliente.api.callback.CategoriasResponseCallback;
 import br.com.alloy.comanditcliente.api.dto.CategoriasResponse;
+import br.com.alloy.comanditcliente.api.dto.ComandaRequest;
+import br.com.alloy.comanditcliente.api.dto.PedidosResponse;
+import br.com.alloy.comanditcliente.api.model.Pedido;
 import br.com.alloy.comanditcliente.api.model.ProdutoCategoria;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +42,31 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        comandaLogin();
+        //comandaLogin();
+        carregarPedidos();
+    }
+
+    private void carregarPedidos() {
+        ComandaRequest cr = new ComandaRequest(4, "DTPKSK");
+        retrofitConfig.getComanditAPI().consultarPedidosComanda(cr).enqueue(new Callback<PedidosResponse>() {
+            @Override
+            public void onResponse(Call<PedidosResponse> call, Response<PedidosResponse> response) {
+                if(response.isSuccessful()) {
+                    System.out.println(response.body());
+                    PedidosResponse resp = response.body().getData();
+                    for(Pedido p : resp.getPedidos()) {
+                        System.out.println(p);
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Erro no response", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PedidosResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Erro na request", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void comandaLogin() {

@@ -5,6 +5,13 @@ public class ComandaRequest {
     private Integer comanda;
     private String sam;
 
+    public ComandaRequest() {}
+
+    public ComandaRequest(Integer comanda, String sam) {
+        this.comanda = comanda;
+        this.sam = sam;
+    }
+
     public Integer getComanda() {
         return comanda;
     }

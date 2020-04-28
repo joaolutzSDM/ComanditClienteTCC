@@ -20,9 +20,7 @@ public class Pedido {
     private BigDecimal valorPedido;
     @SerializedName("ID_PEDIDO_HISTORICO")
     private Integer idPedidoHistorico;
-    @SerializedName("ID_PEDIDO")
     private Integer idPedido;
-    @SerializedName("VALOR_TOTAL_PEDIDO")
     private BigDecimal valorTotalPedido;
 
     public Integer getIdComanda() {
@@ -95,6 +93,21 @@ public class Pedido {
 
     public void setValorTotalPedido(BigDecimal valorTotalPedido) {
         this.valorTotalPedido = valorTotalPedido;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "idComanda=" + idComanda +
+                ", idProduto=" + idProduto +
+                ", nomeProduto='" + nomeProduto + '\'' +
+                ", valorProduto=" + valorProduto +
+                ", quantidadePedido=" + quantidadePedido +
+                ", valorPedido=" + valorPedido +
+                ", idPedidoHistorico=" + idPedidoHistorico +
+                ", idPedido=" + idPedido +
+                ", valorTotalPedido=" + valorTotalPedido +
+                '}';
     }
 
 }
