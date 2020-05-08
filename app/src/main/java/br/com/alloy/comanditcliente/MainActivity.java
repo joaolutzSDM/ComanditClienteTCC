@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private void carregarPedidos() {
         Comanda comanda = new Comanda();
         comanda.setIdComanda(1);
-        comanda.setSenhaAcessoMobile("232323");
+        comanda.setSenhaAcessoMobile("111111");
         retrofitConfig.getComanditAPI().consultarPedidosComanda(comanda).enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
