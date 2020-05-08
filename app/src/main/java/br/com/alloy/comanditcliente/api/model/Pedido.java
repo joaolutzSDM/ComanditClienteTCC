@@ -1,58 +1,48 @@
 package br.com.alloy.comanditcliente.api.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.math.BigDecimal;
 
 public class Pedido {
 
-    @SerializedName("ID_COMANDA")
-    private Integer idComanda;
-    @SerializedName("ID_PRODUTO_PD")
-    private Integer idProduto;
-    @SerializedName("NOME_PRODUTO_PD")
-    private String nomeProduto;
-    @SerializedName("VALOR_PRODUTO_PD")
-    private BigDecimal valorProduto;
-    @SerializedName("QUANTIDADE_PEDIDO")
+    private Integer item;
+    private Long idPedido;
+    private Produto produto;
     private Integer quantidadePedido;
-    @SerializedName("VALOR_PEDIDO")
     private BigDecimal valorPedido;
-    @SerializedName("ID_PEDIDO_HISTORICO")
-    private Integer idPedidoHistorico;
-    private Integer idPedido;
-    private BigDecimal valorTotalPedido;
+    private String observacaoPedido;
+    private PedidoHistorico pedidoHistorico;
+    private BigDecimal valorTotal;
 
-    public Integer getIdComanda() {
-        return idComanda;
+    public Integer getItem() {
+        return item;
     }
 
-    public void setIdComanda(Integer idComanda) {
-        this.idComanda = idComanda;
+    public void setItem(Integer item) {
+        this.item = item;
     }
 
-    public Integer getIdProduto() {
-        return idProduto;
+    public Long getIdPedido() {
+        return idPedido;
     }
 
-    public void setIdProduto(Integer idProduto) {
-        this.idProduto = idProduto;
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
-    public BigDecimal getValorProduto() {
-        return valorProduto;
+    public PedidoHistorico getPedidoHistorico() {
+        return pedidoHistorico;
     }
 
-    public void setValorProduto(BigDecimal valorProduto) {
-        this.valorProduto = valorProduto;
+    public void setPedidoHistorico(PedidoHistorico pedidoHistorico) {
+        this.pedidoHistorico = pedidoHistorico;
     }
 
     public Integer getQuantidadePedido() {
@@ -71,43 +61,33 @@ public class Pedido {
         this.valorPedido = valorPedido;
     }
 
-    public Integer getIdPedidoHistorico() {
-        return idPedidoHistorico;
+    public String getObservacaoPedido() {
+        return observacaoPedido;
     }
 
-    public void setIdPedidoHistorico(Integer idPedidoHistorico) {
-        this.idPedidoHistorico = idPedidoHistorico;
+    public void setObservacaoPedido(String observacaoPedido) {
+        this.observacaoPedido = observacaoPedido;
     }
 
-    public Integer getIdPedido() {
-        return idPedido;
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 
-    public void setIdPedido(Integer idPedido) {
-        this.idPedido = idPedido;
-    }
-
-    public BigDecimal getValorTotalPedido() {
-        return valorTotalPedido;
-    }
-
-    public void setValorTotalPedido(BigDecimal valorTotalPedido) {
-        this.valorTotalPedido = valorTotalPedido;
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     @Override
     public String toString() {
         return "Pedido{" +
-                "idComanda=" + idComanda +
-                ", idProduto=" + idProduto +
-                ", nomeProduto='" + nomeProduto + '\'' +
-                ", valorProduto=" + valorProduto +
+                "item=" + item +
+                ", idPedido=" + idPedido +
+                ", produto=" + produto +
                 ", quantidadePedido=" + quantidadePedido +
                 ", valorPedido=" + valorPedido +
-                ", idPedidoHistorico=" + idPedidoHistorico +
-                ", idPedido=" + idPedido +
-                ", valorTotalPedido=" + valorTotalPedido +
+                ", observacaoPedido='" + observacaoPedido + '\'' +
+                ", pedidoHistorico=" + pedidoHistorico +
+                ", valorTotal=" + valorTotal +
                 '}';
     }
-
 }

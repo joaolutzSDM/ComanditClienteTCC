@@ -1,24 +1,15 @@
 package br.com.alloy.comanditcliente.api.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.math.BigDecimal;
 
 public class Produto {
 
-    @SerializedName("ID_PRODUTO")
     private Integer idProduto;
-    @SerializedName("NOME_PRODUTO")
     private String nomeProduto;
-    @SerializedName("NOME_PRODUTO_CARDAPIO")
     private String nomeProdutoCardapio;
-    @SerializedName("INGREDIENTES_PRODUTO_CARDAPIO")
     private String ingredientesProdutoCardapio;
-    @SerializedName("VALOR_PRODUTO")
     private BigDecimal valorProduto;
-    @SerializedName("ATIVO")
     private Boolean ativo;
-    @SerializedName("DISPONIVEL")
     private Boolean disponivel;
 
     public Integer getIdProduto() {
@@ -77,4 +68,16 @@ public class Produto {
         this.disponivel = disponivel;
     }
 
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "idProduto=" + idProduto +
+                ", nomeProduto='" + nomeProduto + '\'' +
+                ", nomeProdutoCardapio='" + nomeProdutoCardapio + '\'' +
+                ", ingredientesProdutoCardapio='" + ingredientesProdutoCardapio + '\'' +
+                ", valorProduto=" + valorProduto +
+                ", ativo=" + ativo +
+                ", disponivel=" + disponivel +
+                '}';
+    }
 }

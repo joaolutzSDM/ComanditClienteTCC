@@ -1,18 +1,12 @@
 package br.com.alloy.comanditcliente.api.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
 
 public class Comanda {
 
-    @SerializedName("ID_COMANDA")
     private Integer idComanda;
-    @SerializedName("NUMERO_MESA")
     private Integer numeroMesa;
-    @SerializedName("SENHA_ACESSO_MOBILE")
     private String senhaAcessoMobile;
-    @SerializedName("HORA_ABERTURA")
     private Date horaAbertura;
 
     public Integer getIdComanda() {
@@ -47,4 +41,13 @@ public class Comanda {
         this.horaAbertura = horaAbertura;
     }
 
+    @Override
+    public String toString() {
+        return "Comanda{" +
+                "idComanda=" + idComanda +
+                ", numeroMesa=" + numeroMesa +
+                ", senhaAcessoMobile='" + senhaAcessoMobile + '\'' +
+                ", horaAbertura=" + horaAbertura +
+                '}';
+    }
 }

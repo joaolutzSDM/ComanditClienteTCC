@@ -9,7 +9,7 @@ public class RetrofitConfig {
 
     public RetrofitConfig() {
         comanditAPI = new Retrofit.Builder()
-                .baseUrl("http://WORKSTATION:3312/comanditrest/api/")
+                .baseUrl("http://WORKSTATION:3312/comandit/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(ComanditAPI.class);
     }
