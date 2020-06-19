@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.ui.notifications;
+package br.com.alloy.comanditcliente.ui.comanda;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import br.com.alloy.comanditcliente.R;
 
-public class NotificationsFragment extends Fragment {
+public class ComandaFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private ComandaViewModel comandaViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        comandaViewModel =
+                ViewModelProviders.of(this).get(ComandaViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        comandaViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

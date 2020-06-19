@@ -1,4 +1,4 @@
-package br.com.alloy.comanditcliente.ui.home;
+package br.com.alloy.comanditcliente.ui.cardapio;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import br.com.alloy.comanditcliente.R;
 
-public class HomeFragment extends Fragment {
+public class CardapioFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private CardapioViewModel cardapioViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        cardapioViewModel =
+                ViewModelProviders.of(this).get(CardapioViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        final TextView textView = root.findViewById(R.id.text_notifications);
+        cardapioViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
