@@ -3,6 +3,7 @@ package br.com.alloy.comanditcliente.api;
 import java.util.List;
 
 import br.com.alloy.comanditcliente.api.model.Comanda;
+import br.com.alloy.comanditcliente.api.model.Conta;
 import br.com.alloy.comanditcliente.api.model.Pedido;
 import br.com.alloy.comanditcliente.api.model.Produto;
 import br.com.alloy.comanditcliente.api.model.ProdutoCategoria;
@@ -24,5 +25,8 @@ public interface ComanditAPI {
 
     @POST("pedido/consultar/comanda")
     Call<List<Pedido>> consultarPedidosComanda(@Body Comanda comanda);
+
+    @POST("pedido/consultar/conta")
+    Call<Conta> consultarContaComanda(@Body Comanda comanda);
 
 }
