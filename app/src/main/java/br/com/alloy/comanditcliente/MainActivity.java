@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private void carregarPedidos() {
         Comanda comanda = new Comanda();
         comanda.setIdComanda(1);
-        comanda.setSenhaAcessoMobile("111111");
+        comanda.setSenhaAcessoMobile("212121");
         retrofitConfig.getComanditAPI().consultarPedidosComanda(comanda).enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
@@ -63,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     if(response.code() == 500) {
                         APIException ex = ExceptionUtils.parseException(response);
                         Toast.makeText(MainActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Ocorreu um erro ao realizar a consulta", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(MainActivity.this, "Ocorreu um erro ao realizar a consulta", Toast.LENGTH_SHORT).show();
                 }
             }
 
