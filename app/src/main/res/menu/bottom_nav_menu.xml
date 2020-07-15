@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_comanda"
         android:icon="@drawable/ic_credit_card_black_24dp"
         android:title="@string/title_comanda" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_pedidos"
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="@string/title_pedidos" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_cardapio"
         android:icon="@drawable/ic_restaurant_menu_black_24dp"
         android:title="@string/title_cardapio" />
 

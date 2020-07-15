@@ -4,16 +4,26 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.Date;
+
+import br.com.alloy.comanditcliente.service.model.Comanda;
+
 public class ComandaViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<Comanda> comanda;
 
     public ComandaViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        comanda = new MutableLiveData<>();
+        //Mock para Testes
+        Comanda c = new Comanda();
+        c.setIdComanda(1);
+        c.setNumeroMesa(1);
+        c.setSenhaAcessoMobile("ABCDEF");
+        c.setHoraAbertura(new Date());
+        comanda.setValue(c);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<Comanda> getComanda() {
+        return comanda;
     }
 }

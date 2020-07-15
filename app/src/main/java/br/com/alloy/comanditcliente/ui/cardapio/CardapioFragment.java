@@ -22,7 +22,7 @@ public class CardapioFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         cardapioViewModel =
                 ViewModelProviders.of(this).get(CardapioViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View root = inflater.inflate(R.layout.fragment_cardapio, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
         cardapioViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

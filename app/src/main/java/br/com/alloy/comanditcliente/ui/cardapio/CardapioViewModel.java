@@ -10,7 +10,7 @@ public class CardapioViewModel extends ViewModel {
 
     public CardapioViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("Cardápio");
     }
 
     public LiveData<String> getText() {
