@@ -13,12 +13,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.util.List;
 
-import br.com.alloy.comanditcliente.api.ExceptionUtils;
-import br.com.alloy.comanditcliente.api.RetrofitConfig;
-import br.com.alloy.comanditcliente.api.dto.APIException;
-import br.com.alloy.comanditcliente.api.model.Comanda;
-import br.com.alloy.comanditcliente.api.model.Pedido;
-import br.com.alloy.comanditcliente.api.model.ProdutoCategoria;
+import br.com.alloy.comanditcliente.service.ExceptionUtils;
+import br.com.alloy.comanditcliente.service.RetrofitConfig;
+import br.com.alloy.comanditcliente.service.dto.APIException;
+import br.com.alloy.comanditcliente.service.model.Comanda;
+import br.com.alloy.comanditcliente.service.model.Pedido;
+import br.com.alloy.comanditcliente.service.model.ProdutoCategoria;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
