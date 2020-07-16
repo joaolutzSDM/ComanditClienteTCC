@@ -5,17 +5,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitConfig {
 
-    private ComanditAPI comanditAPI;
+    private ComanditClientAPI comanditClientAPI; // http://WORKSTATION:3312/comandit/api/cliente/
+    private ComanditClientAPIMock comanditClientAPIMock; // https://comandit.github.io/mock/comanditclientapi/
 
     public RetrofitConfig() {
-        comanditAPI = new Retrofit.Builder()
-                .baseUrl("http://WORKSTATION:3312/comandit/api/cliente/")
+        comanditClientAPIMock = new Retrofit.Builder()
+                .baseUrl("https://comandit.github.io/mock/comanditclientapi/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .build().create(ComanditAPI.class);
+                .build().create(ComanditClientAPIMock.class);
     }
 
-    public ComanditAPI getComanditAPI() {
-        return comanditAPI;
+    public ComanditClientAPIMock getComanditAPI() {
+        return comanditClientAPIMock;
     }
 
 }

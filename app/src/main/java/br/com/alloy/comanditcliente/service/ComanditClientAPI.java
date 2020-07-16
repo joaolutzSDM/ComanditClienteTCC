@@ -12,7 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-public interface ComanditAPI {
+public interface ComanditClientAPI {
 
     @POST("comanda/login")
     Call<Comanda> comandaLogin(@Body Comanda comanda);

@@ -41,15 +41,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        //comandaLogin();
-        carregarPedidos();
+        comandaLogin();
     }
 
     private void carregarPedidos() {
         Comanda comanda = new Comanda();
         comanda.setIdComanda(1);
-        comanda.setSenhaAcessoMobile("212121");
-        retrofitConfig.getComanditAPI().consultarPedidosComanda(comanda).enqueue(new Callback<List<Pedido>>() {
+        comanda.setSenhaAcessoMobile("111111");
+        retrofitConfig.getComanditAPI().consultarPedidosComanda().enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
                 if(response.isSuccessful()) {

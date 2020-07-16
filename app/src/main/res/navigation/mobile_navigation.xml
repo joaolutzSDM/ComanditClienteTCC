@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_comanda"
-        android:name="br.com.alloy.comanditcliente.ui.pedidos.PedidosFragment"
+        android:name="br.com.alloy.comanditcliente.ui.comanda.ComandaFragment"
         android:label="@string/title_comanda"
         tools:layout="@layout/fragment_comanda" />
 
     <fragment
         android:id="@+id/navigation_pedidos"
-        android:name="br.com.alloy.comanditcliente.ui.comanda.ComandaFragment"
+        android:name="br.com.alloy.comanditcliente.ui.pedidos.PedidosFragment"
         android:label="@string/title_pedidos"
         tools:layout="@layout/fragment_pedidos" />
 
@@ -22,4 +22,5 @@
         android:name="br.com.alloy.comanditcliente.ui.cardapio.CardapioFragment"
         android:label="@string/title_cardapio"
         tools:layout="@layout/fragment_cardapio" />
+
 </navigation>
