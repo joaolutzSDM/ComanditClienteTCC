@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.util.List;
 
+import br.com.alloy.comanditcliente.service.ComanditClientAPIMock;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
@@ -25,13 +26,13 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RetrofitConfig retrofitConfig;
+    private static RetrofitConfig retrofitConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        retrofitConfig = new RetrofitConfig();
+        retrofitConfig = RetrofitConfig.getInstance();
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -42,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         comandaLogin();
+    }
+
+//    TODO Mudar em Prod
+//    public static ComanditClientAPI getComanditAPI() {
+//        return retrofitConfig.getComanditAPI();
+//    }
+
+    public static ComanditClientAPIMock getComanditAPI() {
+        return retrofitConfig.getComanditAPI();
     }
 
     private void carregarPedidos() {
