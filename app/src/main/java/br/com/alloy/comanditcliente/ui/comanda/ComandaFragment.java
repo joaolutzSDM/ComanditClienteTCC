@@ -28,7 +28,7 @@ public class ComandaFragment extends Fragment {
         comandaViewModel.getComanda().observe(getViewLifecycleOwner(), new Observer<Comanda>() {
             @Override
             public void onChanged(@Nullable Comanda c) {
-                comandaBinding.textComanda.setText(c.toString());
+                comandaBinding.textviewComanda.setText(c.toString());
             }
         });
         return view;
