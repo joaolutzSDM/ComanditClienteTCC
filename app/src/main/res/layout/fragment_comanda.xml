@@ -20,84 +20,97 @@
                 android:layout_height="160dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/comanda_background">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_launcher_foreground"/>
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@drawable/comanda_background">
 
-                    <TextView
-                        android:id="@+id/textview_comanda"
+                    <ImageView
+                        android:id="@+id/imageview_client_logo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_gravity="end"
-                        android:text="1"
-                        android:textAlignment="viewEnd"
-                        android:textSize="30sp" />
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_launcher_foreground"/>
 
-                    <TextView
-                        android:id="@+id/textview_mesa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="Mesa 1"
-                        android:textAlignment="viewEnd"
-                        android:textSize="18sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="Comanda ativa desde"
-                        android:textAlignment="viewEnd"
-                        android:textSize="18sp" />
+                        <TextView
+                            android:id="@+id/textview_comanda"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="30dp"
+                            android:layout_gravity="end"
+                            android:text="001"
+                            android:textAppearance="@style/numeroComanda"
+                            android:textAlignment="viewEnd" />
 
-                    <TextView
-                        android:id="@+id/textview_abertura"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="16/07/20 20:00"
-                        android:textAlignment="viewEnd"
-                        android:textSize="18sp" />
+                        <TextView
+                            android:id="@+id/textview_mesa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Mesa 1"
+                            android:textAppearance="@style/dadosComanda"
+                            android:textAlignment="viewEnd" />
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/comanda_ativa_desde"
+                            android:textAppearance="@style/dadosComanda"
+                            android:textAlignment="viewEnd"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textview_abertura"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="16/07/20 20:00"
+                            android:textAppearance="@style/dadosComanda"
+                            android:textAlignment="viewEnd"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_conta"
                 android:layout_width="match_parent"
-                android:layout_height="407dp"
+                android:layout_height="534dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toBottomOf="@id/card_comanda">
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="bottom">
 
                 <TextView
                     android:id="@+id/textview_conta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Minha conta"
-                    android:textColor="@color/cardview_shadow_start_color"
+                    android:text="@string/minha_conta"
                     android:textAlignment="viewStart"
+                    android:textColor="@color/grey"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

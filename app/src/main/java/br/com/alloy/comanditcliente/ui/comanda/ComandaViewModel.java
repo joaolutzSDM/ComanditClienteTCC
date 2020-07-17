@@ -7,13 +7,16 @@ import androidx.lifecycle.ViewModel;
 import java.util.Date;
 
 import br.com.alloy.comanditcliente.service.model.Comanda;
+import br.com.alloy.comanditcliente.service.model.Conta;
 
 public class ComandaViewModel extends ViewModel {
 
     private MutableLiveData<Comanda> comanda;
+    private MutableLiveData<Conta> conta;
 
     public ComandaViewModel() {
         comanda = new MutableLiveData<>();
+        conta = new MutableLiveData<>();
         //Mock para Testes
         Comanda c = new Comanda();
         c.setIdComanda(1);
@@ -25,5 +28,13 @@ public class ComandaViewModel extends ViewModel {
 
     public LiveData<Comanda> getComanda() {
         return comanda;
+    }
+
+    public LiveData<Conta> getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta.setValue(conta);
     }
 }

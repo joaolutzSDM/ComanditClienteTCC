@@ -3,4 +3,11 @@
     <string name="title_comanda">Comanda</string>
     <string name="title_pedidos">Pedidos</string>
     <string name="title_cardapio">Cardápio</string>
+    <string name="minha_conta">Minha conta</string>
+    <string name="comanda_ativa_desde">Comanda ativa desde</string>
+
+    <!--    Toast Messages      -->
+    <string name="erroRequest">Ocorreu um erro de comunicação</string>
+    <string name="erroCarregarConta">Erro ao carregar dados da conta</string>
+
 </resources>
