@@ -20,6 +20,7 @@ import br.com.alloy.comanditcliente.MainActivity;
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
+import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
 import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
@@ -76,7 +77,7 @@ public class ComandaFragment extends Fragment {
     }
 
     private void loadAccount() {
-        MainActivity.getComanditAPI().consultarContaComanda().enqueue(new Callback<Conta>() {
+        RetrofitConfig.getComanditAPI().consultarContaComanda().enqueue(new Callback<Conta>() {
             @Override
             public void onResponse(Call<Conta> call, Response<Conta> response) {
                 if(response.isSuccessful()) {

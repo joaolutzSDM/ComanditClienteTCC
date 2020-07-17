@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        retrofitConfig = RetrofitConfig.getInstance();
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -45,20 +44,11 @@ public class MainActivity extends AppCompatActivity {
         comandaLogin();
     }
 
-//    TODO Mudar em Prod
-//    public static ComanditClientAPI getComanditAPI() {
-//        return retrofitConfig.getComanditAPI();
-//    }
-
-    public static ComanditClientAPIMock getComanditAPI() {
-        return retrofitConfig.getComanditAPI();
-    }
-
     private void carregarPedidos() {
         Comanda comanda = new Comanda();
         comanda.setIdComanda(1);
         comanda.setSenhaAcessoMobile("111111");
-        retrofitConfig.getComanditAPI().consultarPedidosComanda().enqueue(new Callback<List<Pedido>>() {
+        RetrofitConfig.getComanditAPI().consultarPedidosComanda().enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
                 if(response.isSuccessful()) {
@@ -85,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void comandaLogin() {
-        retrofitConfig.getComanditAPI().consultarCategorias().enqueue(new Callback<List<ProdutoCategoria>>() {
+        RetrofitConfig.getComanditAPI().consultarCategorias().enqueue(new Callback<List<ProdutoCategoria>>() {
             @Override
             public void onResponse(Call<List<ProdutoCategoria>> call, Response<List<ProdutoCategoria>> response) {
                 if(response.isSuccessful()) {
