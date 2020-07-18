@@ -1,6 +1,7 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.text.SimpleDateFormat;
 import br.com.alloy.comanditcliente.MainActivity;
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
+import br.com.alloy.comanditcliente.repository.ComandaRepository;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
@@ -32,12 +34,14 @@ public class ComandaFragment extends Fragment {
 
     private FragmentComandaBinding binding;
     private ComandaViewModel comandaViewModel;
+    private ComandaRepository comandaRepository;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentComandaBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         comandaViewModel = new ViewModelProvider(this).get(ComandaViewModel.class);
+        comandaRepository = new ComandaRepository(getContext(), comandaViewModel);
         createViewModelObservers();
         loadData();
         return view;
@@ -65,7 +69,7 @@ public class ComandaFragment extends Fragment {
 
     private void loadData() {
         loadClientLogo();
-        loadAccount();
+        comandaRepository.getContaComanda();
     }
 
     private void loadClientLogo() {
@@ -74,25 +78,6 @@ public class ComandaFragment extends Fragment {
                 .circleCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(binding.imageviewClientLogo);
-    }
-
-    private void loadAccount() {
-        RetrofitConfig.getComanditAPI().consultarContaComanda().enqueue(new Callback<Conta>() {
-            @Override
-            public void onResponse(Call<Conta> call, Response<Conta> response) {
-                if(response.isSuccessful()) {
-                    comandaViewModel.setConta(response.body());
-                } else {
-                    APIException exception = ExceptionUtils.parseException(response);
-                    Toast.makeText(getContext(), R.string.erroCarregarConta, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Conta> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.erroRequest, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

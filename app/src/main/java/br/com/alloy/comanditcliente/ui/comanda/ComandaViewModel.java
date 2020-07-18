@@ -34,7 +34,12 @@ public class ComandaViewModel extends ViewModel {
         return conta;
     }
 
+    public void setComanda(Comanda comanda) {
+        this.comanda.setValue(comanda);
+    }
+
     public void setConta(Conta conta) {
         this.conta.setValue(conta);
     }
+
 }
