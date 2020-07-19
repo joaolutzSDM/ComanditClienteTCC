@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import br.com.alloy.comanditcliente.MainActivity;
 import br.com.alloy.comanditcliente.R;
@@ -51,10 +52,10 @@ public class ComandaFragment extends Fragment {
         //dados da comanda
         comandaViewModel.getComanda().observe(getViewLifecycleOwner(), new Observer<Comanda>() {
             @Override
-            public void onChanged(@Nullable Comanda c) {
-                binding.textviewComanda.setText(c.getIdComanda().toString());
-                binding.textviewMesa.setText(c.getNumeroMesa().toString());
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            public void onChanged(Comanda c) {
+                binding.textviewComanda.setText(String.format(Locale.getDefault(), "%d", c.getIdComanda()));
+                binding.textviewMesa.setText(String.format(Locale.getDefault(), "%d", c.getNumeroMesa()));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
                 binding.textviewAbertura.setText(sdf.format(c.getHoraAbertura()));
             }
         });
@@ -62,7 +63,7 @@ public class ComandaFragment extends Fragment {
         comandaViewModel.getConta().observe(getViewLifecycleOwner(), new Observer<Conta>() {
             @Override
             public void onChanged(Conta conta) {
-                //comandaBinding.
+
             }
         });
     }
