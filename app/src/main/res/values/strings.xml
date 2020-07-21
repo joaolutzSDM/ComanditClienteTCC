@@ -12,4 +12,15 @@
     <string name="erroRequest">Ocorreu um erro de comunicação</string>
     <string name="erroCarregarConta">Erro ao carregar dados da conta</string>
 
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Comanda</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short">Entrar</string>
+    <string name="welcome">"Bem vindo(a) !"</string>
+    <string name="invalid_username">Comanda inválida</string>
+    <string name="invalid_password">Senha inválida</string>
+    <string name="login_failed">"Login falhou"</string>
+    <string name="login_qr_code">Login QR Code</string>
+
 </resources>

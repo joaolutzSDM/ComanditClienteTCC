@@ -1,13 +1,10 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -18,18 +15,11 @@ import com.bumptech.glide.Glide;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import br.com.alloy.comanditcliente.MainActivity;
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
 import br.com.alloy.comanditcliente.repository.ComandaRepository;
-import br.com.alloy.comanditcliente.service.ExceptionUtils;
-import br.com.alloy.comanditcliente.service.RetrofitConfig;
-import br.com.alloy.comanditcliente.service.dto.APIException;
 import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ComandaFragment extends Fragment {
 
@@ -41,7 +31,7 @@ public class ComandaFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentComandaBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        comandaViewModel = new ViewModelProvider(this).get(ComandaViewModel.class);
+        comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
         comandaRepository = new ComandaRepository(getContext(), comandaViewModel);
         createViewModelObservers();
         loadData();
