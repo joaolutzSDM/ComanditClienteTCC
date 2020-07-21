@@ -5,6 +5,7 @@
     <string name="title_cardapio">Cardápio</string>
     <string name="minha_conta">Minha conta</string>
     <string name="comanda_ativa_desde">Comanda ativa desde</string>
+
     <!--    Logger      -->
     <string name="api_exception">APIException</string>
 
@@ -12,8 +13,9 @@
     <string name="erroRequest">Ocorreu um erro de comunicação</string>
     <string name="erroCarregarConta">Erro ao carregar dados da conta</string>
 
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Comanda</string>
+    <!--    Tela Login      -->
+    <string name="title_activity_login">@string/app_name</string>
+    <string name="prompt_comanda">Comanda</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Entrar</string>
@@ -22,5 +24,9 @@
     <string name="invalid_password">Senha inválida</string>
     <string name="login_failed">"Login falhou"</string>
     <string name="login_qr_code">Login QR Code</string>
+    <string name="informativo_login">Solicite sua senha de acesso ou seu QR code a um atendente</string>
+    <string name="qrcode">QRCode</string>
+    <string name="cancel_qrcode_reading">Leitura de QR Code cancelada</string>
+    <string name="qrcode_scan_prompt">Escaneie seu QR Code</string>
 
 </resources>
