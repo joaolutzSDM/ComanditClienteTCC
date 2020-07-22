@@ -22,8 +22,13 @@ import com.google.zxing.integration.android.IntentResult;
 
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.ActivityLoginBinding;
+import br.com.alloy.comanditcliente.service.RetrofitConfig;
+import br.com.alloy.comanditcliente.service.model.Comanda;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Callback<Comanda> {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
@@ -139,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
             if(result.getContents() != null) {
                 //código lido corretamente
                 String qrCode = result.getContents();
+                String[] comanda = qrCode.split("-");
+                doLogin(comanda[0], comanda[1]);
             } else {
                 Toast.makeText(this, R.string.cancel_qrcode_reading, Toast.LENGTH_SHORT).show();
             }
@@ -146,4 +153,24 @@ public class LoginActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    private void doLogin(String idComanda, String senhaAcessoMobile) {
+        Comanda comanda = new Comanda(Integer.parseInt(idComanda), senhaAcessoMobile);
+        RetrofitConfig.getComanditAPI().comandaLogin().enqueue(this);
+    }
+
+    @Override
+    public void onResponse(Call<Comanda> call, Response<Comanda> response) {
+        if(response.isSuccessful()) {
+
+        } else {
+
+        }
+    }
+
+    @Override
+    public void onFailure(Call<Comanda> call, Throwable t) {
+
+    }
+
 }

@@ -9,6 +9,14 @@ public class Comanda {
     private String senhaAcessoMobile;
     private Date horaAbertura;
 
+    public Comanda() {
+    }
+
+    public Comanda(Integer idComanda, String senhaAcessoMobile) {
+        this.idComanda = idComanda;
+        this.senhaAcessoMobile = senhaAcessoMobile;
+    }
+
     public Integer getIdComanda() {
         return idComanda;
     }
