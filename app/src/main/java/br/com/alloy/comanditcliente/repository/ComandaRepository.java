@@ -8,6 +8,7 @@ import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
+import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
 import br.com.alloy.comanditcliente.ui.comanda.ComandaViewModel;
 import retrofit2.Call;
@@ -24,8 +25,8 @@ public class ComandaRepository {
         this.comandaViewModel = comandaViewModel;
     }
 
-    public void getContaComanda() {
-        RetrofitConfig.getComanditAPI().consultarContaComanda().enqueue(new Callback<Conta>() {
+    public void getContaComanda(Comanda comanda) {
+        RetrofitConfig.getComanditAPI().consultarContaComanda(comanda).enqueue(new Callback<Conta>() {
             @Override
             public void onResponse(Call<Conta> call, Response<Conta> response) {
                 if(response.isSuccessful()) {
@@ -33,7 +34,7 @@ public class ComandaRepository {
                 } else {
                     APIException exception = ExceptionUtils.parseException(response);
                     Log.e(context.getString(R.string.api_exception), exception.getMessage());
-                    Toast.makeText(context, exception.getMessage(), Toast.LENGTH_SHORT);
+                    Toast.makeText(context, exception.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 

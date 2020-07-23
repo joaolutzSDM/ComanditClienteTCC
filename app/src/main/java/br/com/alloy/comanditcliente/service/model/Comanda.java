@@ -1,8 +1,9 @@
 package br.com.alloy.comanditcliente.service.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Comanda {
+public class Comanda implements Serializable {
 
     private Integer idComanda;
     private Integer numeroMesa;

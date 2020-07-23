@@ -8,9 +8,10 @@
 
     <!--    Logger      -->
     <string name="api_exception">APIException</string>
+    <string name="comm_failure">CommunicationFailure</string>
 
     <!--    Toast Messages      -->
-    <string name="erroRequest">Ocorreu um erro de comunicação</string>
+    <string name="erroRequest">Erro de comunicação. Verifique sua conexão Wi-Fi.</string>
     <string name="erroCarregarConta">Erro ao carregar dados da conta</string>
 
     <!--    Tela Login      -->

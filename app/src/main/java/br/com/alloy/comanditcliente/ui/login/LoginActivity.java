@@ -1,28 +1,29 @@
 package br.com.alloy.comanditcliente.ui.login;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.StringJoiner;
+
+import br.com.alloy.comanditcliente.MainActivity;
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.ActivityLoginBinding;
+import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
+import br.com.alloy.comanditcliente.service.dto.APIException;
 import br.com.alloy.comanditcliente.service.model.Comanda;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,43 +41,22 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
         setContentView(binding.getRoot());
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
+        setObserversAndListeners();
+    }
 
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                binding.login.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    binding.comanda.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    binding.password.setError(getString(loginFormState.getPasswordError()));
-                }
+    private void setObserversAndListeners() {
+        loginViewModel.getLoginFormState().observe(this, loginFormState -> {
+            if (loginFormState == null) {
+                return;
+            }
+            binding.login.setEnabled(loginFormState.isDataValid());
+            if (loginFormState.getUsernameError() != null) {
+                binding.comanda.setError(getString(loginFormState.getUsernameError()));
+            }
+            if (loginFormState.getPasswordError() != null) {
+                binding.password.setError(getString(loginFormState.getPasswordError()));
             }
         });
-
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                binding.loading.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
-
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -96,36 +76,16 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
         };
         binding.comanda.addTextChangedListener(afterTextChangedListener);
         binding.password.addTextChangedListener(afterTextChangedListener);
-        binding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(binding.comanda.getText().toString(),
-                            binding.password.getText().toString());
-                }
-                return false;
+        binding.password.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                doLogin(binding.comanda.getText().toString(), binding.password.getText().toString());
             }
-        });
-
-        binding.login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.loading.setVisibility(View.VISIBLE);
-                loginViewModel.login(binding.comanda.getText().toString(),
-                        binding.password.getText().toString());
-            }
+            return false;
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-    }
-
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    public void onLoginClick(View view) {
+        doLogin(binding.comanda.getText().toString(), binding.password.getText().toString());
     }
 
     public void qrCodeLogin(View view) {
@@ -144,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
             if(result.getContents() != null) {
                 //código lido corretamente
                 String qrCode = result.getContents();
-                String[] comanda = qrCode.split("-");
+                String[] comanda = qrCode.split("-",2);
                 doLogin(comanda[0], comanda[1]);
             } else {
                 Toast.makeText(this, R.string.cancel_qrcode_reading, Toast.LENGTH_SHORT).show();
@@ -155,22 +115,37 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
     }
 
     private void doLogin(String idComanda, String senhaAcessoMobile) {
+        binding.loading.setVisibility(View.VISIBLE);
         Comanda comanda = new Comanda(Integer.parseInt(idComanda), senhaAcessoMobile);
-        RetrofitConfig.getComanditAPI().comandaLogin().enqueue(this);
+        RetrofitConfig.getComanditAPI().comandaLogin(comanda).enqueue(this);
     }
 
     @Override
     public void onResponse(Call<Comanda> call, Response<Comanda> response) {
+        binding.loading.setVisibility(View.GONE);
         if(response.isSuccessful()) {
-
+            //login realizado com sucesso, redireciona para a tela principal (MainActivity)
+            Comanda comanda = response.body();
+            startMainActivity(comanda);
         } else {
-
+            APIException exception = ExceptionUtils.parseException(response);
+            Log.e(getString(R.string.api_exception), exception.getMessage());
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onFailure(Call<Comanda> call, Throwable t) {
+        binding.loading.setVisibility(View.GONE);
+        Log.e(getString(R.string.comm_failure), t.getMessage(), t);
+        Toast.makeText(this, R.string.erroRequest, Toast.LENGTH_SHORT).show();
+    }
 
+    private void startMainActivity(Comanda comanda) {
+        Intent i = new Intent(this, MainActivity.class);
+        i.putExtra("comanda", comanda);
+        startActivity(i);
+        finish(); //encerra a tela atual (login)
     }
 
 }
