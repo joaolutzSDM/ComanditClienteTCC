@@ -1,9 +1,11 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,22 +19,25 @@ import java.util.Locale;
 
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
-import br.com.alloy.comanditcliente.repository.ComandaRepository;
+import br.com.alloy.comanditcliente.service.ExceptionUtils;
+import br.com.alloy.comanditcliente.service.RetrofitConfig;
+import br.com.alloy.comanditcliente.service.dto.APIException;
 import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class ComandaFragment extends Fragment {
+public class ComandaFragment extends Fragment implements Callback<Conta> {
 
     private FragmentComandaBinding binding;
     private ComandaViewModel comandaViewModel;
-    private ComandaRepository comandaRepository;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentComandaBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
-        comandaRepository = new ComandaRepository(getContext(), comandaViewModel);
         createViewModelObservers();
         loadData();
         return view;
@@ -60,12 +65,13 @@ public class ComandaFragment extends Fragment {
 
     private void loadData() {
         loadClientLogo();
-        comandaRepository.getContaComanda();
+        RetrofitConfig.getComanditAPI().consultarContaComanda(
+                comandaViewModel.getComanda().getValue()).enqueue(this);
     }
 
     private void loadClientLogo() {
         Glide.with(this)
-                .load("https://comandit.github.io/mock/comanditclientapi/images/client_logo.jpg")
+                .load(getString(R.string.client_logo_url))
                 .circleCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(binding.imageviewClientLogo);
@@ -75,6 +81,22 @@ public class ComandaFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResponse(Call<Conta> call, Response<Conta> response) {
+        if(response.isSuccessful()) {
+            comandaViewModel.setConta(response.body());
+        } else {
+            APIException exception = ExceptionUtils.parseException(response);
+            Log.e(getString(R.string.api_exception), exception.getMessage());
+            Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onFailure(Call<Conta> call, Throwable t) {
+        Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
     }
 
 }

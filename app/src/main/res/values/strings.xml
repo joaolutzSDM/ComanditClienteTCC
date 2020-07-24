@@ -3,16 +3,14 @@
     <string name="title_comanda">Comanda</string>
     <string name="title_pedidos">Pedidos</string>
     <string name="title_cardapio">Cardápio</string>
-    <string name="minha_conta">Minha conta</string>
-    <string name="comanda_ativa_desde">Comanda ativa desde</string>
 
     <!--    Logger      -->
     <string name="api_exception">APIException</string>
     <string name="comm_failure">CommunicationFailure</string>
 
     <!--    Toast Messages      -->
-    <string name="erroRequest">Erro de comunicação. Verifique sua conexão Wi-Fi.</string>
-    <string name="erroCarregarConta">Erro ao carregar dados da conta</string>
+    <string name="requestError">Erro de comunicação. Verifique sua conexão Wi-Fi.</string>
+    <string name="accountLoadindError">Erro ao consultar a conta da comanda</string>
 
     <!--    Tela Login      -->
     <string name="title_activity_login">@string/app_name</string>
@@ -21,7 +19,7 @@
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Entrar</string>
     <string name="welcome">"Bem vindo(a) !"</string>
-    <string name="invalid_username">Comanda inválida</string>
+    <string name="invalid_comanda">Comanda inválida</string>
     <string name="invalid_password">Senha inválida</string>
     <string name="login_failed">"Login falhou"</string>
     <string name="login_qr_code">Login QR Code</string>
@@ -29,5 +27,10 @@
     <string name="qrcode">QRCode</string>
     <string name="cancel_qrcode_reading">Leitura de QR Code cancelada</string>
     <string name="qrcode_scan_prompt">Escaneie seu QR Code</string>
+
+    <!--    Tela Comanda    -->
+    <string name="client_logo_url">https://comandit.github.io/mock/comanditclientapi/images/client_logo.jpg</string>
+    <string name="minha_conta">Minha conta</string>
+    <string name="comanda_ativa_desde">Comanda ativa desde</string>
 
 </resources>

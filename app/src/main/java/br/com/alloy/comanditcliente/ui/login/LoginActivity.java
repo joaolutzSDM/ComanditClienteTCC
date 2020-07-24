@@ -16,8 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.util.StringJoiner;
-
 import br.com.alloy.comanditcliente.MainActivity;
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.ActivityLoginBinding;
@@ -39,8 +37,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         setObserversAndListeners();
     }
 
@@ -138,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
     public void onFailure(Call<Comanda> call, Throwable t) {
         binding.loading.setVisibility(View.GONE);
         Log.e(getString(R.string.comm_failure), t.getMessage(), t);
-        Toast.makeText(this, R.string.erroRequest, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.requestError, Toast.LENGTH_LONG).show();
     }
 
     private void startMainActivity(Comanda comanda) {
