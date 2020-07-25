@@ -1,5 +1,6 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -46,19 +49,27 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
     private void createViewModelObservers() {
         //dados da comanda
         comandaViewModel.getComanda().observe(getViewLifecycleOwner(), new Observer<Comanda>() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onChanged(Comanda c) {
-                binding.textviewComanda.setText(String.format(Locale.getDefault(), "%d", c.getIdComanda()));
-                binding.textviewMesa.setText(String.format(Locale.getDefault(), "%d", c.getNumeroMesa()));
+                binding.numeroComanda.setText(String.format("%d", c.getIdComanda()));
+                binding.numeroMesa.setText(String.format("%d", c.getNumeroMesa()));
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
-                binding.textviewAbertura.setText(sdf.format(c.getHoraAbertura()));
+                binding.horaAbertura.setText(sdf.format(c.getHoraAbertura()));
             }
         });
         //dados da conta
         comandaViewModel.getConta().observe(getViewLifecycleOwner(), new Observer<Conta>() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onChanged(Conta conta) {
-
+                binding.quantidadePedidos.setText(String.format("%d", conta.getQtdItens()));
+                binding.taxaServico.setText(String.format("%d%%", conta.getTaxaServico()));
+                //valores
+                binding.valorPedidos.setText(formatCurrencyValue(conta.getValorPedidos()));
+                binding.valorServico.setText(formatCurrencyValue(conta.getValorServico()));
+                binding.valorCouvert.setText(formatCurrencyValue(conta.getValorCouvert()));
+                binding.valorTotal.setText(formatCurrencyValue(conta.getValorTotal()));
             }
         });
     }
@@ -75,6 +86,17 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
                 .circleCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(binding.imageviewClientLogo);
+    }
+
+    private String formatCurrencyValue(BigDecimal value) {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        String formatado = nf.format(value);
+        if(formatado.contains(" ")) {
+            return formatado;
+        } else {
+            String symbol = nf.getCurrency().getSymbol(Locale.getDefault());
+            return formatado.replace(symbol, symbol.concat(" "));
+        }
     }
 
     @Override

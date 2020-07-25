@@ -32,5 +32,12 @@
     <string name="client_logo_url">https://comandit.github.io/mock/comanditclientapi/images/client_logo.jpg</string>
     <string name="minha_conta">Minha conta</string>
     <string name="comanda_ativa_desde">Comanda ativa desde</string>
+    <string name="logo_cliente">logo_cliente</string>
+    <string name="quantidade_pedidos">Quantidade pedidos</string>
+    <string name="taxa_servico">Taxa Serviço</string>
+    <string name="valor_pedidos">Valor pedidos</string>
+    <string name="valor_servico">Valor serviço</string>
+    <string name="valor_couvert">Valor couvert</string>
+    <string name="valor_total">Valor total</string>
 
 </resources>
