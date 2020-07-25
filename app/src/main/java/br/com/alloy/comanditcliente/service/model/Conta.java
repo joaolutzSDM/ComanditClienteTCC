@@ -4,12 +4,21 @@ import java.math.BigDecimal;
 
 public class Conta {
 
+    private Comanda comanda;
     private Integer qtdItens;
     private Integer taxaServico;
     private BigDecimal valorPedidos;
     private BigDecimal valorServico;
     private BigDecimal valorCouvert;
     private BigDecimal valorTotal;
+
+    public Comanda getComanda() {
+        return comanda;
+    }
+
+    public void setComanda(Comanda comanda) {
+        this.comanda = comanda;
+    }
 
     public Integer getQtdItens() {
         return qtdItens;

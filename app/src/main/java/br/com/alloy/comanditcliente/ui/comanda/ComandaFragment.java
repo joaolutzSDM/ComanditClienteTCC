@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -19,13 +18,13 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
-import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,41 +40,36 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
         binding = FragmentComandaBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
-        createViewModelObservers();
+        setViewModelObserversAndListeners();
+        loadClientLogo();
         loadData();
         return view;
     }
 
-    private void createViewModelObservers() {
+    @SuppressLint("DefaultLocale")
+    private void setViewModelObserversAndListeners() {
         //dados da comanda
-        comandaViewModel.getComanda().observe(getViewLifecycleOwner(), new Observer<Comanda>() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onChanged(Comanda c) {
-                binding.numeroComanda.setText(String.format("%d", c.getIdComanda()));
-                binding.numeroMesa.setText(String.format("%d", c.getNumeroMesa()));
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
-                binding.horaAbertura.setText(sdf.format(c.getHoraAbertura()));
-            }
+        comandaViewModel.getComanda().observe(getViewLifecycleOwner(), c -> {
+            binding.numeroComanda.setText(String.format("%d", c.getIdComanda()));
+            binding.numeroMesa.setText(String.format("%d", c.getNumeroMesa()));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+            binding.horaAbertura.setText(sdf.format(c.getHoraAbertura()));
         });
         //dados da conta
-        comandaViewModel.getConta().observe(getViewLifecycleOwner(), new Observer<Conta>() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onChanged(Conta conta) {
-                binding.quantidadePedidos.setText(String.format("%d", conta.getQtdItens()));
-                binding.taxaServico.setText(String.format("%d%%", conta.getTaxaServico()));
-                //valores
-                binding.valorPedidos.setText(formatCurrencyValue(conta.getValorPedidos()));
-                binding.valorServico.setText(formatCurrencyValue(conta.getValorServico()));
-                binding.valorCouvert.setText(formatCurrencyValue(conta.getValorCouvert()));
-                binding.valorTotal.setText(formatCurrencyValue(conta.getValorTotal()));
-            }
+        comandaViewModel.getConta().observe(getViewLifecycleOwner(), conta -> {
+            binding.quantidadePedidos.setText(String.format("%d", conta.getQtdItens()));
+            binding.taxaServico.setText(String.format("%d%%", conta.getTaxaServico()));
+            //valores
+            binding.valorPedidos.setText(formatCurrencyValue(conta.getValorPedidos()));
+            binding.valorServico.setText(formatCurrencyValue(conta.getValorServico()));
+            binding.valorCouvert.setText(formatCurrencyValue(conta.getValorCouvert()));
+            binding.valorTotal.setText(formatCurrencyValue(conta.getValorTotal()));
         });
+        //setting loadData as the method for the swipe down refresh layout
+        binding.swipeRefreshComanda.setOnRefreshListener(this::loadData);
     }
 
     private void loadData() {
-        loadClientLogo();
         RetrofitConfig.getComanditAPI().consultarContaComanda(
                 comandaViewModel.getComanda().getValue()).enqueue(this);
     }
@@ -94,7 +88,7 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
         if(formatado.contains(" ")) {
             return formatado;
         } else {
-            String symbol = nf.getCurrency().getSymbol(Locale.getDefault());
+            String symbol = Objects.requireNonNull(nf.getCurrency()).getSymbol(Locale.getDefault());
             return formatado.replace(symbol, symbol.concat(" "));
         }
     }
@@ -107,8 +101,14 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
 
     @Override
     public void onResponse(Call<Conta> call, Response<Conta> response) {
+        if(binding.swipeRefreshComanda.isRefreshing()) {
+            binding.swipeRefreshComanda.setRefreshing(false);
+        }
         if(response.isSuccessful()) {
-            comandaViewModel.setConta(response.body());
+            Conta conta = response.body();
+            assert conta != null;
+            comandaViewModel.setComanda(conta.getComanda());
+            comandaViewModel.setConta(conta);
         } else {
             APIException exception = ExceptionUtils.parseException(response);
             Log.e(getString(R.string.api_exception), exception.getMessage());
@@ -118,6 +118,9 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
 
     @Override
     public void onFailure(Call<Conta> call, Throwable t) {
+        if(binding.swipeRefreshComanda.isRefreshing()) {
+            binding.swipeRefreshComanda.setRefreshing(false);
+        }
         Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
     }
 
