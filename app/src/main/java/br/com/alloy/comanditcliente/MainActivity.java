@@ -1,9 +1,6 @@
 package br.com.alloy.comanditcliente;
 
 import android.os.Bundle;
-import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,20 +9,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.Objects;
 
-import br.com.alloy.comanditcliente.service.ComanditClientAPIMock;
-import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
-import br.com.alloy.comanditcliente.service.dto.APIException;
 import br.com.alloy.comanditcliente.service.model.Comanda;
-import br.com.alloy.comanditcliente.service.model.Pedido;
-import br.com.alloy.comanditcliente.service.model.ProdutoCategoria;
 import br.com.alloy.comanditcliente.ui.comanda.ComandaViewModel;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 

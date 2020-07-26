@@ -26,6 +26,7 @@ import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
 import br.com.alloy.comanditcliente.service.model.Conta;
+import br.com.alloy.comanditcliente.ui.util.StringUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,10 +61,10 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
             binding.quantidadePedidos.setText(String.format("%d", conta.getQtdItens()));
             binding.taxaServico.setText(String.format("%d%%", conta.getTaxaServico()));
             //valores
-            binding.valorPedidos.setText(formatCurrencyValue(conta.getValorPedidos()));
-            binding.valorServico.setText(formatCurrencyValue(conta.getValorServico()));
-            binding.valorCouvert.setText(formatCurrencyValue(conta.getValorCouvert()));
-            binding.valorTotal.setText(formatCurrencyValue(conta.getValorTotal()));
+            binding.valorPedidos.setText(StringUtil.formatCurrencyValue(conta.getValorPedidos()));
+            binding.valorServico.setText(StringUtil.formatCurrencyValue(conta.getValorServico()));
+            binding.valorCouvert.setText(StringUtil.formatCurrencyValue(conta.getValorCouvert()));
+            binding.valorTotal.setText(StringUtil.formatCurrencyValue(conta.getValorTotal()));
         });
         //setting loadData as the method for the swipe down refresh layout
         binding.swipeRefreshComanda.setOnRefreshListener(this::loadData);
@@ -80,17 +81,6 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
                 .circleCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(binding.imageviewClientLogo);
-    }
-
-    private String formatCurrencyValue(BigDecimal value) {
-        NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.getDefault());
-        String formatado = nf.format(value);
-        if(formatado.contains(" ")) {
-            return formatado;
-        } else {
-            String symbol = Objects.requireNonNull(nf.getCurrency()).getSymbol(Locale.getDefault());
-            return formatado.replace(symbol, symbol.concat(" "));
-        }
     }
 
     @Override
