@@ -32,7 +32,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoHold
     @Override
     public void onBindViewHolder(PedidoHolder holder, int position) {
         Pedido pedido = pedidos.get(position);
-        holder.binding.nomeProduto.setText(pedido.getProduto().getNomeProduto());
+        holder.binding.nomeProduto.setText(pedido.getProduto().getNomeProdutoCardapio());
         holder.binding.quantidadePedido.setText(String.format(Locale.getDefault(), "%dx", pedido.getQuantidadePedido()));
         holder.binding.horaPedido.setText(timeOrderFormat.format(pedido.getPedidoHistorico().getDataPedido()));
         holder.binding.valorPedido.setText(StringUtil.formatCurrencyValue(pedido.getValorTotal()));
