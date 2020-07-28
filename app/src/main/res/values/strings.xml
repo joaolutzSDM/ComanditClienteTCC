@@ -40,4 +40,12 @@
     <string name="valor_couvert">Valor couvert</string>
     <string name="valor_total">Valor total</string>
 
+    <!--    Item Pedido     -->
+    <string name="order_clock_image">order_clock_image</string>
+    <string name="nome_do_produto">Nome do Produto</string>
+    <string name="qtde">Qtde</string>
+    <string name="hora_pedido">Hora Pedido</string>
+    <string name="valor_pedido">Valor Pedido</string>
+    <string name="observacao_pedido">Observacão Pedido</string>
+
 </resources>
