@@ -7,15 +7,9 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.temporal.Temporal;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.PedidoItemBinding;
 import br.com.alloy.comanditcliente.service.model.Pedido;
 import br.com.alloy.comanditcliente.ui.util.StringUtil;
@@ -23,7 +17,7 @@ import br.com.alloy.comanditcliente.ui.util.StringUtil;
 public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoHolder> {
 
     private final List<Pedido> pedidos;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+    private SimpleDateFormat timeOrderFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     public PedidoAdapter(List<Pedido> pedidos) {
         this.pedidos = pedidos;
@@ -38,10 +32,9 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoHold
     @Override
     public void onBindViewHolder(PedidoHolder holder, int position) {
         Pedido pedido = pedidos.get(position);
-        holder.binding.itemPedido.setText(String.format(Locale.getDefault(), "%d", pedido.getItem()));
         holder.binding.nomeProduto.setText(pedido.getProduto().getNomeProduto());
         holder.binding.quantidadePedido.setText(String.format(Locale.getDefault(), "%dx", pedido.getQuantidadePedido()));
-        holder.binding.horaPedido.setText(simpleDateFormat.format(pedido.getPedidoHistorico().getDataPedido()));
+        holder.binding.horaPedido.setText(timeOrderFormat.format(pedido.getPedidoHistorico().getDataPedido()));
         holder.binding.valorPedido.setText(StringUtil.formatCurrencyValue(pedido.getValorTotal()));
 
         if(pedido.getObservacaoPedido() == null || pedido.getObservacaoPedido().trim().isEmpty()) {
