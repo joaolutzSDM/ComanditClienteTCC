@@ -8,6 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +21,16 @@ import br.com.alloy.comanditcliente.service.model.ProdutoCategoria;
 public class CardapioAdapter extends BaseExpandableListAdapter {
 
     private List<ProdutoCategoria> categorias;
-    private Map<ProdutoCategoria, List<Produto>> produtos;
+    private Map<Integer, List<Produto>> produtos;
     private String produtoImageUrl = "";
 
-    public CardapioAdapter(List<ProdutoCategoria> categorias, Map<ProdutoCategoria, List<Produto>> produtos) {
+    public CardapioAdapter(List<ProdutoCategoria> categorias) {
         this.categorias = categorias;
-        this.produtos = produtos;
+        this.produtos = new HashMap<>();
+    }
+
+    public Map<Integer, List<Produto>> getProdutos() {
+        return produtos;
     }
 
     @Override
@@ -35,7 +40,7 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return produtos.get(categorias.get(groupPosition)).size();
+        return produtos.get(categorias.get(groupPosition).getIdProdutoCategoria()).size();
     }
 
     @Override
@@ -45,7 +50,7 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return produtos.get(categorias.get(groupPosition)).get(childPosition);
+        return produtos.get(categorias.get(groupPosition).getIdProdutoCategoria()).get(childPosition);
     }
 
     @Override
@@ -55,7 +60,7 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return produtos.get(categorias.get(groupPosition)).get(childPosition).getIdProduto();
+        return produtos.get(categorias.get(groupPosition).getIdProdutoCategoria()).get(childPosition).getIdProduto();
     }
 
     @Override
@@ -68,7 +73,7 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
     }
 
     private Produto getProduto(int groupPosition, int childPosition) {
-        return produtos.get(categorias.get(groupPosition)).get(childPosition);
+        return produtos.get(categorias.get(groupPosition).getIdProdutoCategoria()).get(childPosition);
     }
 
     @Override
