@@ -1,5 +1,7 @@
 package br.com.alloy.comanditcliente.service.model;
 
+import java.util.Objects;
+
 public class ProdutoCategoria {
 
     private Integer idProdutoCategoria;
@@ -37,6 +39,19 @@ public class ProdutoCategoria {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoCategoria that = (ProdutoCategoria) o;
+        return idProdutoCategoria.equals(that.idProdutoCategoria);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idProdutoCategoria);
     }
 
     @Override

@@ -14,11 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import java.util.Objects;
 
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
@@ -39,12 +36,12 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentComandaBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
         comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
         setViewModelObserversAndListeners();
-        loadClientLogo();
-        loadData();
-        return view;
+        binding.swipeRefreshComanda.setRefreshing(true);
+        carregarLogoCliente();
+        carregarDadosComanda();
+        return binding.getRoot();
     }
 
     @SuppressLint("DefaultLocale")
@@ -67,15 +64,16 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
             binding.valorTotal.setText(StringUtil.formatCurrencyValue(conta.getValorTotal()));
         });
         //setting loadData as the method for the swipe down refresh layout
-        binding.swipeRefreshComanda.setOnRefreshListener(this::loadData);
+        binding.swipeRefreshComanda.setOnRefreshListener(this::carregarDadosComanda);
     }
 
-    private void loadData() {
-        RetrofitConfig.getComanditAPI().consultarContaComanda(
-                comandaViewModel.getComanda().getValue()).enqueue(this);
+    private void carregarDadosComanda() {
+        //TODO Remove this in PROD (Mock)
+        //Comanda comanda = comandaViewModel.getComanda().getValue();
+        RetrofitConfig.getComanditAPIMock().consultarContaComanda().enqueue(this);
     }
 
-    private void loadClientLogo() {
+    private void carregarLogoCliente() {
         Glide.with(this)
                 .load(getString(R.string.client_logo_url))
                 .circleCrop()

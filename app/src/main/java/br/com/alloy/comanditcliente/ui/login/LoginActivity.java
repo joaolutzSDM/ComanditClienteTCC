@@ -113,8 +113,9 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
 
     private void doLogin(String idComanda, String senhaAcessoMobile) {
         binding.loading.setVisibility(View.VISIBLE);
+        //TODO Remove this in PROD (Mock)
         Comanda comanda = new Comanda(Integer.parseInt(idComanda), senhaAcessoMobile);
-        RetrofitConfig.getComanditAPI().comandaLogin(comanda).enqueue(this);
+        RetrofitConfig.getComanditAPIMock().comandaLogin().enqueue(this);
     }
 
     @Override

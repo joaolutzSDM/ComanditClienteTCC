@@ -4,16 +4,28 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
+import br.com.alloy.comanditcliente.service.model.Pedido;
+
 public class PedidosViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<List<Pedido>> pedidos;
 
     public PedidosViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Pedidos");
+        pedidos = new MutableLiveData<>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Pedido>> getPedidos() {
+        return pedidos;
     }
+
+    public List<Pedido> getPedidosList() {
+        return pedidos.getValue();
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos.setValue(pedidos);
+    }
+
 }

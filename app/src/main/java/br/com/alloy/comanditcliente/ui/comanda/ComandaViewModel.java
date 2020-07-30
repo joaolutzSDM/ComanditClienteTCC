@@ -17,13 +17,6 @@ public class ComandaViewModel extends ViewModel {
     public ComandaViewModel() {
         comanda = new MutableLiveData<>();
         conta = new MutableLiveData<>();
-        //Mock para Testes
-        Comanda c = new Comanda();
-        c.setIdComanda(1);
-        c.setNumeroMesa(1);
-        c.setSenhaAcessoMobile("ABCDEF");
-        c.setHoraAbertura(new Date());
-        comanda.setValue(c);
     }
 
     public LiveData<Comanda> getComanda() {

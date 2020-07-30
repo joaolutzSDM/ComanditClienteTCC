@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import br.com.alloy.comanditcliente.databinding.PedidoItemBinding;
+import br.com.alloy.comanditcliente.databinding.ItemPedidoBinding;
 import br.com.alloy.comanditcliente.service.model.Pedido;
 import br.com.alloy.comanditcliente.ui.util.StringUtil;
 
@@ -25,7 +25,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoHold
 
     @Override
     public PedidoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PedidoHolder(PedidoItemBinding.inflate(LayoutInflater.from(parent.getContext()),
+        return new PedidoHolder(ItemPedidoBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent,false));
     }
 
@@ -36,6 +36,12 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoHold
         holder.binding.quantidadePedido.setText(String.format(Locale.getDefault(), "%dx", pedido.getQuantidadePedido()));
         holder.binding.horaPedido.setText(timeOrderFormat.format(pedido.getPedidoHistorico().getDataPedido()));
         holder.binding.valorPedido.setText(StringUtil.formatCurrencyValue(pedido.getValorTotal()));
+
+        if(pedido.getPedidoHistorico() != null) {
+            holder.binding.horaPedidoLayout.setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.horaPedidoLayout.setVisibility(View.INVISIBLE);
+        }
 
         if(pedido.getObservacaoPedido() == null || pedido.getObservacaoPedido().trim().isEmpty()) {
             holder.binding.observacaoPedido.setVisibility(View.GONE);
@@ -52,9 +58,9 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoHold
 
     static class PedidoHolder extends RecyclerView.ViewHolder {
 
-        private PedidoItemBinding binding;
+        private ItemPedidoBinding binding;
 
-        PedidoHolder(PedidoItemBinding binding) {
+        PedidoHolder(ItemPedidoBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
