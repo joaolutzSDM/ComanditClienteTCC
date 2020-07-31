@@ -89,9 +89,7 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
 
     @Override
     public void onResponse(Call<Conta> call, Response<Conta> response) {
-        if(binding.swipeRefreshComanda.isRefreshing()) {
-            binding.swipeRefreshComanda.setRefreshing(false);
-        }
+        cancelRefresh();
         if(response.isSuccessful()) {
             Conta conta = response.body();
             assert conta != null;
@@ -106,10 +104,14 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
 
     @Override
     public void onFailure(Call<Conta> call, Throwable t) {
-        if(binding.swipeRefreshComanda.isRefreshing()) {
+        cancelRefresh();
+        Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
+    }
+
+    private void cancelRefresh() {
+        if (binding.swipeRefreshComanda.isRefreshing()) {
             binding.swipeRefreshComanda.setRefreshing(false);
         }
-        Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
     }
 
 }

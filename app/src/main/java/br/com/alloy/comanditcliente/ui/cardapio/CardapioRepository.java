@@ -41,7 +41,7 @@ public class CardapioRepository {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if(response.isSuccessful()) {
-                    listener.onProdutosResponse(response.body());
+                    listener.onProdutosResponse(response.body(), categoria.getIdProdutoCategoria());
                 } else {
                     listener.onAPIException(ExceptionUtils.parseException(response));
                 }

@@ -56,12 +56,19 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         });
 
         cardapioViewModel.getProdutos().observe(getViewLifecycleOwner(), produtos -> {
-
+            if(!produtos.isEmpty()) {
+                Integer idCategoria = cardapioViewModel.getIdCategoria().getValue();
+                if(!getCardapioAdapter().getProdutos().containsKey(idCategoria)) {
+                    getCardapioAdapter().getProdutos().put(idCategoria, produtos);
+                    getCardapioAdapter().notifyDataSetChanged();
+                }
+            }
         });
 
         binding.expandableListviewCardapio.setOnGroupExpandListener(groupPosition -> {
-            ProdutoCategoria categoria = (ProdutoCategoria) binding.expandableListviewCardapio.getExpandableListAdapter().getGroup(groupPosition);
-
+            binding.swipeRefreshCardapio.setRefreshing(true);
+            ProdutoCategoria categoria = (ProdutoCategoria) getCardapioAdapter().getGroup(groupPosition);
+            cardapioRepository.getProdutos(categoria);
         });
 
         binding.expandableListviewCardapio.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
@@ -77,25 +84,33 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
 
     @Override
     public void onCategoriasResponse(List<ProdutoCategoria> categorias) {
+        cancelRefresh();
         cardapioViewModel.setCategorias(categorias);
     }
 
+    private void cancelRefresh() {
+        if (binding.swipeRefreshCardapio.isRefreshing()) {
+            binding.swipeRefreshCardapio.setRefreshing(false);
+        }
+    }
+
     @Override
-    public void onProdutosResponse(List<Produto> produtos) {
+    public void onProdutosResponse(List<Produto> produtos, Integer idCategoria) {
+        cancelRefresh();
         cardapioViewModel.setProdutos(produtos);
+        cardapioViewModel.setIdCategoria(idCategoria);
     }
 
     @Override
     public void onAPIException(APIException ex) {
+        cancelRefresh();
         Log.e(getString(R.string.api_exception), ex.getMessage());
         Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onRequestFailure(Throwable t) {
-        if(binding.swipeRefreshCardapio.isRefreshing()) {
-            binding.swipeRefreshCardapio.setRefreshing(false);
-        }
+        cancelRefresh();
         Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
     }
 
