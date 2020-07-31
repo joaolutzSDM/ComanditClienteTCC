@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,19 +57,26 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         });
 
         cardapioViewModel.getProdutos().observe(getViewLifecycleOwner(), produtos -> {
-            if(!produtos.isEmpty()) {
-                Integer idCategoria = cardapioViewModel.getIdCategoria().getValue();
-                if(!getCardapioAdapter().getProdutos().containsKey(idCategoria)) {
-                    getCardapioAdapter().getProdutos().put(idCategoria, produtos);
-                    getCardapioAdapter().notifyDataSetChanged();
+            getCardapioAdapter().getProdutos().put(cardapioViewModel.getIdCategoria().getValue(), produtos);
+            getCardapioAdapter().notifyDataSetChanged();
+            binding.expandableListviewCardapio.expandGroup(getCardapioAdapter().getLastExpandedGroup());
+        });
+
+        binding.expandableListviewCardapio.setOnGroupClickListener((parent, v, groupPosition, id) -> {
+            if(!binding.expandableListviewCardapio.isGroupExpanded(groupPosition)) {
+                ProdutoCategoria categoria = getCardapioAdapter().getCategoria(groupPosition);
+                if (!getCardapioAdapter().getProdutos().containsKey(categoria.getIdProdutoCategoria())) {
+                    binding.swipeRefreshCardapio.setRefreshing(true);
+                    cardapioRepository.getProdutos(categoria);
+                    getCardapioAdapter().setLastExpandedGroup(groupPosition);
+                    return false;
                 }
             }
+            return true;
         });
 
         binding.expandableListviewCardapio.setOnGroupExpandListener(groupPosition -> {
-            binding.swipeRefreshCardapio.setRefreshing(true);
-            ProdutoCategoria categoria = (ProdutoCategoria) getCardapioAdapter().getGroup(groupPosition);
-            cardapioRepository.getProdutos(categoria);
+
         });
 
         binding.expandableListviewCardapio.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
@@ -97,8 +105,8 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
     @Override
     public void onProdutosResponse(List<Produto> produtos, Integer idCategoria) {
         cancelRefresh();
-        cardapioViewModel.setProdutos(produtos);
         cardapioViewModel.setIdCategoria(idCategoria);
+        cardapioViewModel.setProdutos(produtos);
     }
 
     @Override

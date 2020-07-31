@@ -23,10 +23,19 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
     private List<ProdutoCategoria> categorias;
     private Map<Integer, List<Produto>> produtos;
     private String produtoImageUrl = "";
+    private int lastExpandedGroup;
 
     public CardapioAdapter(List<ProdutoCategoria> categorias) {
         this.categorias = categorias;
         this.produtos = new HashMap<>();
+    }
+
+    public int getLastExpandedGroup() {
+        return lastExpandedGroup;
+    }
+
+    public void setLastExpandedGroup(int lastExpandedGroup) {
+        this.lastExpandedGroup = lastExpandedGroup;
     }
 
     public Map<Integer, List<Produto>> getProdutos() {
@@ -68,7 +77,7 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    private ProdutoCategoria getCategoria(int groupPosition) {
+    public ProdutoCategoria getCategoria(int groupPosition) {
         return categorias.get(groupPosition);
     }
 

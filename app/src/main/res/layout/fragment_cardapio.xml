@@ -12,7 +12,8 @@
         <ExpandableListView
             android:id="@+id/expandable_listview_cardapio"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
