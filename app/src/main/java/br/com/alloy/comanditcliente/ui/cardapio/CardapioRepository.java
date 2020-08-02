@@ -12,7 +12,7 @@ import retrofit2.Response;
 
 public class CardapioRepository {
 
-    CardapioResponseListener listener;
+    private CardapioResponseListener listener;
 
     public CardapioRepository(CardapioResponseListener listener) {
         this.listener = listener;

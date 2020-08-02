@@ -63,20 +63,16 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         });
 
         binding.expandableListviewCardapio.setOnGroupClickListener((parent, v, groupPosition, id) -> {
-            if(!binding.expandableListviewCardapio.isGroupExpanded(groupPosition)) {
+            if(!parent.isGroupExpanded(groupPosition)) {
                 ProdutoCategoria categoria = getCardapioAdapter().getCategoria(groupPosition);
                 if (!getCardapioAdapter().getProdutos().containsKey(categoria.getIdProdutoCategoria())) {
                     binding.swipeRefreshCardapio.setRefreshing(true);
                     cardapioRepository.getProdutos(categoria);
                     getCardapioAdapter().setLastExpandedGroup(groupPosition);
-                    return false;
+                    return true;
                 }
             }
-            return true;
-        });
-
-        binding.expandableListviewCardapio.setOnGroupExpandListener(groupPosition -> {
-
+            return false;
         });
 
         binding.expandableListviewCardapio.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
@@ -90,16 +86,16 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         cardapioRepository.getCategorias();
     }
 
-    @Override
-    public void onCategoriasResponse(List<ProdutoCategoria> categorias) {
-        cancelRefresh();
-        cardapioViewModel.setCategorias(categorias);
-    }
-
     private void cancelRefresh() {
         if (binding.swipeRefreshCardapio.isRefreshing()) {
             binding.swipeRefreshCardapio.setRefreshing(false);
         }
+    }
+
+    @Override
+    public void onCategoriasResponse(List<ProdutoCategoria> categorias) {
+        cancelRefresh();
+        cardapioViewModel.setCategorias(categorias);
     }
 
     @Override
