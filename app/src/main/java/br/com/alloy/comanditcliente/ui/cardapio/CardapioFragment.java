@@ -64,9 +64,9 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
 
         binding.expandableListviewCardapio.setOnGroupClickListener((parent, v, groupPosition, id) -> {
             if(!parent.isGroupExpanded(groupPosition)) {
-                ProdutoCategoria categoria = getCardapioAdapter().getCategoria(groupPosition);
-                if (!getCardapioAdapter().getProdutos().containsKey(categoria.getIdProdutoCategoria())) {
+                if (!getCardapioAdapter().getProdutos().containsKey((int) getCardapioAdapter().getGroupId(groupPosition))) {
                     binding.swipeRefreshCardapio.setRefreshing(true);
+                    ProdutoCategoria categoria = getCardapioAdapter().getCategoria(groupPosition);
                     cardapioRepository.getProdutos(categoria);
                     getCardapioAdapter().setLastExpandedGroup(groupPosition);
                     return true;
