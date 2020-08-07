@@ -85,6 +85,11 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
         return produtos.get(categorias.get(groupPosition).getIdProdutoCategoria()).get(childPosition);
     }
 
+    public void updateProdutos(Integer value, List<Produto> produtos) {
+        this.produtos.put(value, produtos);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         ItemCategoriaBinding binding;

@@ -57,8 +57,7 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         });
 
         cardapioViewModel.getProdutos().observe(getViewLifecycleOwner(), produtos -> {
-            getCardapioAdapter().getProdutos().put(cardapioViewModel.getIdCategoria().getValue(), produtos);
-            getCardapioAdapter().notifyDataSetChanged();
+            getCardapioAdapter().updateProdutos(cardapioViewModel.getIdCategoria().getValue(), produtos);
             binding.expandableListviewCardapio.expandGroup(getCardapioAdapter().getLastExpandedGroup());
         });
 
