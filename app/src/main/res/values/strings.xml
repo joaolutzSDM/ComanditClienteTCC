@@ -47,5 +47,6 @@
     <string name="hora_pedido">Hora Pedido</string>
     <string name="valor_pedido">Valor Pedido</string>
     <string name="observacao_pedido">Observacão Pedido</string>
+    <string name="no_products">Não há produtos cadastrados nesta categoria</string>
 
 </resources>

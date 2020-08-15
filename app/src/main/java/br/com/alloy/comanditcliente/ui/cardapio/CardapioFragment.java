@@ -5,30 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import java.util.List;
 
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentCardapioBinding;
-import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
-import br.com.alloy.comanditcliente.service.ExceptionUtils;
-import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
 import br.com.alloy.comanditcliente.service.model.Produto;
 import br.com.alloy.comanditcliente.service.model.ProdutoCategoria;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CardapioFragment extends Fragment implements CardapioResponseListener {
 
@@ -57,8 +46,12 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         });
 
         cardapioViewModel.getProdutos().observe(getViewLifecycleOwner(), produtos -> {
-            getCardapioAdapter().updateProdutos(cardapioViewModel.getIdCategoria().getValue(), produtos);
-            binding.expandableListviewCardapio.expandGroup(getCardapioAdapter().getLastExpandedGroup());
+            if(!produtos.isEmpty()) {
+                getCardapioAdapter().updateProdutos(produtos.get(0).getIdProdutoCategoria(), produtos);
+                binding.expandableListviewCardapio.expandGroup(getCardapioAdapter().getLastExpandedGroup());
+            } else {
+                Toast.makeText(getContext(), R.string.no_products, Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.expandableListviewCardapio.setOnGroupClickListener((parent, v, groupPosition, id) -> {
@@ -73,11 +66,6 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
             }
             return false;
         });
-
-        binding.expandableListviewCardapio.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
-            return true;
-        });
-
         binding.swipeRefreshCardapio.setOnRefreshListener(this::carregarCategorias);
     }
 
@@ -98,9 +86,8 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
     }
 
     @Override
-    public void onProdutosResponse(List<Produto> produtos, Integer idCategoria) {
+    public void onProdutosResponse(List<Produto> produtos) {
         cancelRefresh();
-        cardapioViewModel.setIdCategoria(idCategoria);
         cardapioViewModel.setProdutos(produtos);
     }
 

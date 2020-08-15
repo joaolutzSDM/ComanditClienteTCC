@@ -14,7 +14,6 @@ public class CardapioViewModel extends ViewModel {
 
     private MutableLiveData<List<ProdutoCategoria>> categorias;
     private MutableLiveData<List<Produto>> produtos;
-    private MutableLiveData<Integer> idCategoria;
 
     public CardapioViewModel() {
         categorias = new MutableLiveData<>();
@@ -35,14 +34,6 @@ public class CardapioViewModel extends ViewModel {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos.setValue(produtos);
-    }
-
-    public LiveData<Integer> getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria.setValue(idCategoria);
     }
 
 }

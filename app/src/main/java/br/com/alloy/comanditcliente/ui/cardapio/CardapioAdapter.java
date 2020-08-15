@@ -85,8 +85,8 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
         return produtos.get(categorias.get(groupPosition).getIdProdutoCategoria()).get(childPosition);
     }
 
-    public void updateProdutos(Integer value, List<Produto> produtos) {
-        this.produtos.put(value, produtos);
+    public void updateProdutos(Integer idProdutoCategoria, List<Produto> produtos) {
+        this.produtos.put(idProdutoCategoria, produtos);
         notifyDataSetChanged();
     }
 

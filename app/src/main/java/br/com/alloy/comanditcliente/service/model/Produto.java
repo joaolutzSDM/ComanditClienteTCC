@@ -11,6 +11,7 @@ public class Produto {
     private BigDecimal valorProduto;
     private Boolean ativo;
     private Boolean disponivel;
+    private Integer idProdutoCategoria;
 
     public Integer getIdProduto() {
         return idProduto;
@@ -66,6 +67,14 @@ public class Produto {
 
     public void setDisponivel(Boolean disponivel) {
         this.disponivel = disponivel;
+    }
+
+    public Integer getIdProdutoCategoria() {
+        return idProdutoCategoria;
+    }
+
+    public void setIdProdutoCategoria(Integer idProdutoCategoria) {
+        this.idProdutoCategoria = idProdutoCategoria;
     }
 
     @Override
