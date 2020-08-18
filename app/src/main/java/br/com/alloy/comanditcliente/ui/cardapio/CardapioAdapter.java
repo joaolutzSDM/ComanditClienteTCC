@@ -117,7 +117,9 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
         }
         Produto produto = getProduto(groupPosition, childPosition);
         binding.nomeProduto.setText(produto.getNomeProdutoCardapio());
-        binding.ingredientes.setText(produto.getIngredientesProdutoCardapio());
+        if(produto.getIngredientesProdutoCardapio() != null && !produto.getIngredientesProdutoCardapio().trim().isEmpty()) {
+            binding.ingredientes.setText(produto.getIngredientesProdutoCardapio());
+        }
         if(produto.getDisponivel()) {
            binding.status.setVisibility(View.GONE);
         } else {
