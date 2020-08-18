@@ -117,6 +117,12 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
         }
         Produto produto = getProduto(groupPosition, childPosition);
         binding.nomeProduto.setText(produto.getNomeProdutoCardapio());
+        binding.ingredientes.setText(produto.getIngredientesProdutoCardapio());
+        if(produto.getDisponivel()) {
+           binding.status.setVisibility(View.GONE);
+        } else {
+            binding.status.setVisibility(View.VISIBLE);
+        }
         //TODO Rever forma de carregamento das imagens dos produtos
         Glide.with(convertView)
                 .load(produtoImageUrl.concat(produto.getIdProduto().toString()))

@@ -48,5 +48,7 @@
     <string name="valor_pedido">Valor Pedido</string>
     <string name="observacao_pedido">Observacão Pedido</string>
     <string name="no_products">Não há produtos cadastrados nesta categoria</string>
+    <string name="status">Status</string>
+    <string name="ingredientes">Ingredientes</string>
 
 </resources>

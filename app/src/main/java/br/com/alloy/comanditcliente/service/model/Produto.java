@@ -87,6 +87,7 @@ public class Produto {
                 ", valorProduto=" + valorProduto +
                 ", ativo=" + ativo +
                 ", disponivel=" + disponivel +
+                ", idProdutoCategoria=" + idProdutoCategoria +
                 '}';
     }
 }
