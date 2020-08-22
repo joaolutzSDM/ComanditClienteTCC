@@ -1,6 +1,10 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,10 +13,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -22,6 +32,7 @@ import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
+import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
 import br.com.alloy.comanditcliente.ui.util.StringUtil;
 import retrofit2.Call;
@@ -37,11 +48,16 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentComandaBinding.inflate(inflater, container, false);
         comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setViewModelObserversAndListeners();
         binding.swipeRefreshComanda.setRefreshing(true);
         carregarLogoCliente();
         carregarDadosComanda();
-        return binding.getRoot();
     }
 
     @SuppressLint("DefaultLocale")
@@ -51,7 +67,7 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
             binding.numeroComanda.setText(String.format("%d", c.getIdComanda()));
             binding.numeroMesa.setText(String.format("%d", c.getNumeroMesa()));
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
-            binding.horaAbertura.setText(sdf.format(c.getHoraAbertura()));
+            binding.horaAbertura.setText(sdf.format(c.getHoraAlteracao()));
         });
         //dados da conta
         comandaViewModel.getConta().observe(getViewLifecycleOwner(), conta -> {
@@ -69,15 +85,15 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
 
     private void carregarDadosComanda() {
         //TODO Remove this in PROD (Mock)
-        //Comanda comanda = comandaViewModel.getComanda().getValue();
-        RetrofitConfig.getComanditAPIMock().consultarContaComanda().enqueue(this);
+        RetrofitConfig.getComanditAPI().consultarContaComanda(
+                comandaViewModel.getComandaForRequest()).enqueue(this);
     }
 
     private void carregarLogoCliente() {
-        Glide.with(this)
+        Glide.with(requireActivity())
+                .asBitmap()
                 .load(getString(R.string.client_logo_url))
                 .circleCrop()
-                .placeholder(R.drawable.ic_launcher_foreground)
                 .into(binding.imageviewClientLogo);
     }
 

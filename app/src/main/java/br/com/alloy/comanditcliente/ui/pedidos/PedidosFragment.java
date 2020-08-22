@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -37,11 +38,16 @@ public class PedidosFragment extends Fragment implements Callback<List<Pedido>> 
         binding = FragmentPedidosBinding.inflate(inflater, container, false);
         pedidosViewModel = new ViewModelProvider(this).get(PedidosViewModel.class);
         comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setViewModelObserversAndListeners();
         //carrega os pedidos
         binding.swipeRefreshPedidos.setRefreshing(true);
         carregarPedidos();
-        return binding.getRoot();
     }
 
     private void setViewModelObserversAndListeners() {
@@ -56,9 +62,7 @@ public class PedidosFragment extends Fragment implements Callback<List<Pedido>> 
     }
 
     private void carregarPedidos() {
-        //TODO - Remover em prod (chamada à API Mock)
-        //Comanda comanda = comandaViewModel.getComanda().getValue();
-        RetrofitConfig.getComanditAPIMock().consultarPedidosComandaResumo().enqueue(this);
+        RetrofitConfig.getComanditAPI().consultarPedidosComanda(comandaViewModel.getComandaForRequest()).enqueue(this);
     }
 
     @Override

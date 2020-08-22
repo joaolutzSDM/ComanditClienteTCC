@@ -25,11 +25,11 @@
     <string name="login_qr_code">Login QR Code</string>
     <string name="informativo_login">Solicite sua senha de acesso ou seu QR code a um atendente</string>
     <string name="qrcode">QRCode</string>
-    <string name="cancel_qrcode_reading">Leitura de QR Code cancelada</string>
     <string name="qrcode_scan_prompt">Escaneie seu QR Code</string>
 
     <!--    Tela Comanda    -->
-    <string name="client_logo_url">https://comandit.github.io/mock/comanditclientapi/images/client_logo.jpg</string>
+    <string name="client_logo_url">http://note-acer:3312/comandit/cliente/api/client_logo.jpg</string>
+<!--    <string name="client_logo_url">http://workstation:3312/comandit/cliente/api/client_logo.jpg</string>  -->
     <string name="minha_conta">Minha conta</string>
     <string name="comanda_ativa_desde">Comanda ativa desde</string>
     <string name="logo_cliente">logo_cliente</string>

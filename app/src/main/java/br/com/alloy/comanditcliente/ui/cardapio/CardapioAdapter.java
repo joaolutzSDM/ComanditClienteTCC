@@ -128,7 +128,6 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
         //TODO Rever forma de carregamento das imagens dos produtos
         Glide.with(convertView)
                 .load(produtoImageUrl.concat(produto.getIdProduto().toString()))
-                .placeholder(R.drawable.ic_launcher_foreground)
                 .into(binding.fotoProduto);
         return convertView;
     }

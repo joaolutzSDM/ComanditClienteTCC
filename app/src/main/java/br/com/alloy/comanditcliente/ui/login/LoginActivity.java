@@ -103,8 +103,6 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
                 String qrCode = result.getContents();
                 String[] comanda = qrCode.split("-",2);
                 doLogin(comanda[0], comanda[1]);
-            } else {
-                Toast.makeText(this, R.string.cancel_qrcode_reading, Toast.LENGTH_SHORT).show();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -113,9 +111,8 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
 
     private void doLogin(String idComanda, String senhaAcessoMobile) {
         binding.loading.setVisibility(View.VISIBLE);
-        //TODO Remove this in PROD (Mock)
         Comanda comanda = new Comanda(Integer.parseInt(idComanda), senhaAcessoMobile);
-        RetrofitConfig.getComanditAPIMock().comandaLogin().enqueue(this);
+        RetrofitConfig.getComanditAPI().comandaLogin(comanda).enqueue(this);
     }
 
     @Override

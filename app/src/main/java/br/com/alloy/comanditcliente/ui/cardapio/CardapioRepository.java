@@ -19,7 +19,7 @@ public class CardapioRepository {
     }
 
     protected void getCategorias() {
-        RetrofitConfig.getComanditAPIMock().consultarCategorias().enqueue(new Callback<List<ProdutoCategoria>>() {
+        RetrofitConfig.getComanditAPI().consultarCategorias().enqueue(new Callback<List<ProdutoCategoria>>() {
             @Override
             public void onResponse(Call<List<ProdutoCategoria>> call, Response<List<ProdutoCategoria>> response) {
                 if(response.isSuccessful()) {
@@ -37,7 +37,7 @@ public class CardapioRepository {
     }
 
     protected void getProdutos(ProdutoCategoria categoria) {
-        RetrofitConfig.getComanditAPIMock().consultarProdutosCategoria().enqueue(new Callback<List<Produto>>() {
+        RetrofitConfig.getComanditAPI().consultarProdutosCategoria(categoria).enqueue(new Callback<List<Produto>>() {
             @Override
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 if(response.isSuccessful()) {

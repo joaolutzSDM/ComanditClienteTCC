@@ -17,13 +17,13 @@ public interface ComanditClientAPI {
     @POST("comanda/login")
     Call<Comanda> comandaLogin(@Body Comanda comanda);
 
-    @GET("produtos/consultarCategorias")
+    @GET("produto/consultar/categorias")
     Call<List<ProdutoCategoria>> consultarCategorias();
 
-    @POST("produtos/consultarPorCategoria")
+    @POST("produto/consultar/categoria")
     Call<List<Produto>> consultarProdutosCategoria(@Body ProdutoCategoria produtoCategoria);
 
-    @POST("pedido/consultar/comanda")
+    @POST("pedido/consultar/comanda/resumo")
     Call<List<Pedido>> consultarPedidosComanda(@Body Comanda comanda);
 
     @POST("pedido/consultar/conta")

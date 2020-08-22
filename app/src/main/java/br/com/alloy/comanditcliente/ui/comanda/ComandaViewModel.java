@@ -23,6 +23,10 @@ public class ComandaViewModel extends ViewModel {
         return comanda;
     }
 
+    public Comanda getComandaForRequest() {
+        return new Comanda(comanda.getValue().getIdComanda(), comanda.getValue().getSenhaAcessoMobile());
+    }
+
     public LiveData<Conta> getConta() {
         return conta;
     }

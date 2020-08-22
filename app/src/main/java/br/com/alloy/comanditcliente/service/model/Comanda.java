@@ -8,7 +8,7 @@ public class Comanda implements Serializable {
     private Integer idComanda;
     private Integer numeroMesa;
     private String senhaAcessoMobile;
-    private Date horaAbertura;
+    private Date horaAlteracao;
 
     public Comanda() {
     }
@@ -42,12 +42,12 @@ public class Comanda implements Serializable {
         this.senhaAcessoMobile = senhaAcessoMobile;
     }
 
-    public Date getHoraAbertura() {
-        return horaAbertura;
+    public Date getHoraAlteracao() {
+        return horaAlteracao;
     }
 
-    public void setHoraAbertura(Date horaAbertura) {
-        this.horaAbertura = horaAbertura;
+    public void setHoraAlteracao(Date horaAlteracao) {
+        this.horaAlteracao = horaAlteracao;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Comanda implements Serializable {
                 "idComanda=" + idComanda +
                 ", numeroMesa=" + numeroMesa +
                 ", senhaAcessoMobile='" + senhaAcessoMobile + '\'' +
-                ", horaAbertura=" + horaAbertura +
+                ", horaAlteracao=" + horaAlteracao +
                 '}';
     }
 }
