@@ -18,4 +18,9 @@ public class StringUtil {
         }
     }
 
+    public static String getCurrencyStringWithoutR$(BigDecimal value) {
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        return fmt.format(value).replace(fmt.getCurrency().getSymbol(Locale.getDefault()), "").trim();
+    }
+
 }

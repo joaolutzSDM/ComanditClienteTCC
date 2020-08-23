@@ -26,11 +26,10 @@
             android:text="@string/ingredientes" />
 
         <TextView
-            android:id="@+id/status"
+            android:id="@+id/valor_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:textStyle="italic"
             android:text="@string/status"
             android:visibility="visible"/>
 

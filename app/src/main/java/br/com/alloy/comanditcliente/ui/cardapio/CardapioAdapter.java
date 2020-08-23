@@ -1,6 +1,9 @@
 package br.com.alloy.comanditcliente.ui.cardapio;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import br.com.alloy.comanditcliente.databinding.ItemCategoriaBinding;
 import br.com.alloy.comanditcliente.databinding.ItemProdutoBinding;
 import br.com.alloy.comanditcliente.service.model.Produto;
 import br.com.alloy.comanditcliente.service.model.ProdutoCategoria;
+import br.com.alloy.comanditcliente.ui.util.StringUtil;
 
 public class CardapioAdapter extends BaseExpandableListAdapter {
 
@@ -121,9 +125,13 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
             binding.ingredientes.setText(produto.getIngredientesProdutoCardapio());
         }
         if(produto.getDisponivel()) {
-           binding.status.setVisibility(View.GONE);
+            binding.valorStatus.setText(StringUtil.getCurrencyStringWithoutR$(produto.getValorProduto()));
+            binding.valorStatus.setTypeface(null, Typeface.NORMAL);
+            binding.valorStatus.setTextColor(Color.MAGENTA);
         } else {
-            binding.status.setVisibility(View.VISIBLE);
+            binding.valorStatus.setText(R.string.cardapio_produto_indisponivel);
+            binding.valorStatus.setTypeface(null, Typeface.BOLD_ITALIC);
+            binding.valorStatus.setTextColor(Color.GRAY);
         }
         //TODO Rever forma de carregamento das imagens dos produtos
         Glide.with(convertView)

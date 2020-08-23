@@ -50,5 +50,6 @@
     <string name="no_products">Não há produtos cadastrados nesta categoria</string>
     <string name="status">Status</string>
     <string name="ingredientes">Ingredientes</string>
+    <string name="cardapio_produto_indisponivel">Indisponível</string>
 
 </resources>
