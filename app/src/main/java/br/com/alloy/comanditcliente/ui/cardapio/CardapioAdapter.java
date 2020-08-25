@@ -125,13 +125,13 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
             binding.ingredientes.setText(produto.getIngredientesProdutoCardapio());
         }
         if(produto.getDisponivel()) {
-            binding.valorStatus.setText(StringUtil.getCurrencyStringWithoutR$(produto.getValorProduto()));
+            binding.valorStatus.setText(StringUtil.formatCurrencyValue(produto.getValorProduto()));
             binding.valorStatus.setTypeface(null, Typeface.NORMAL);
-            binding.valorStatus.setTextColor(Color.MAGENTA);
+            binding.valorStatus.setTextColor(parent.getContext().getResources().getColor(R.color.product_price));
         } else {
             binding.valorStatus.setText(R.string.cardapio_produto_indisponivel);
             binding.valorStatus.setTypeface(null, Typeface.BOLD_ITALIC);
-            binding.valorStatus.setTextColor(Color.GRAY);
+            binding.valorStatus.setTextColor(Color.MAGENTA);
         }
         //TODO Rever forma de carregamento das imagens dos produtos
         Glide.with(convertView)

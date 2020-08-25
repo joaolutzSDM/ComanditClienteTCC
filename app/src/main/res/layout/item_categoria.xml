@@ -9,10 +9,9 @@
         android:id="@+id/nome_categoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="Categorias"
         android:textStyle="bold"
-        android:textColor="@color/colorAccent"
         android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingEnd="?android:attr/expandableListPreferredItemIndicatorRight"
         />
