@@ -101,8 +101,12 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
             if(result.getContents() != null) {
                 //código lido corretamente
                 String qrCode = result.getContents();
-                String[] comanda = qrCode.split("-",2);
-                doLogin(comanda[0], comanda[1]);
+                if(qrCode.contains("Comandit")) {
+                    String[] comanda = qrCode.split("-",3);
+                    doLogin(comanda[1], comanda[2]);
+                } else {
+                    Toast.makeText(this, R.string.invalid_qrcode, Toast.LENGTH_SHORT).show();
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
