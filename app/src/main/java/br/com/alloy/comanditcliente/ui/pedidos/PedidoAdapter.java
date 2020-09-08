@@ -35,8 +35,8 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoHold
         holder.binding.nomeProduto.setText(pedido.getProduto().getNomeProdutoCardapio());
         holder.binding.quantidadePedido.setText(String.format(Locale.getDefault(), "x%d", pedido.getQuantidadePedido()));
         holder.binding.valorPedido.setText(StringUtil.getCurrencyStringWithoutR$(pedido.getValorTotal()));
-        if(pedido.getPedidoHistorico() != null) {
-            holder.binding.horaPedido.setText(timeOrderFormat.format(pedido.getPedidoHistorico().getDataPedido()));
+        if(pedido.getIdPedidoHistorico() != null) {
+            holder.binding.horaPedido.setText(timeOrderFormat.format(pedido.getDataPedido()));
             holder.binding.horaPedidoLayout.setVisibility(View.VISIBLE);
         } else {
             holder.binding.horaPedidoLayout.setVisibility(View.INVISIBLE);

@@ -54,7 +54,7 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         cardapioViewModel.getProdutos().observe(getViewLifecycleOwner(), produtos -> {
             if(!produtos.isEmpty()) {
                 getCardapioAdapter().updateProdutos(produtos.get(0).getIdProdutoCategoria(), produtos);
-                binding.expandableListviewCardapio.expandGroup(getCardapioAdapter().getLastExpandedGroup());
+                binding.expandableListviewCardapio.expandGroup(getCardapioAdapter().getLastExpandedGroup(), true);
             } else {
                 Toast.makeText(getContext(), R.string.no_products, Toast.LENGTH_SHORT).show();
             }

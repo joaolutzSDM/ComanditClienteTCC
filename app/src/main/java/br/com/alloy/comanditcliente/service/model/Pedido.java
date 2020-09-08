@@ -1,6 +1,7 @@
 package br.com.alloy.comanditcliente.service.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Pedido {
 
@@ -10,8 +11,9 @@ public class Pedido {
     private Integer quantidadePedido;
     private BigDecimal valorPedido;
     private String observacaoPedido;
-    private PedidoHistorico pedidoHistorico;
     private BigDecimal valorTotal;
+    private Integer idPedidoHistorico;
+    private Date dataPedido;
 
     public Integer getItem() {
         return item;
@@ -35,14 +37,6 @@ public class Pedido {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
-    }
-
-    public PedidoHistorico getPedidoHistorico() {
-        return pedidoHistorico;
-    }
-
-    public void setPedidoHistorico(PedidoHistorico pedidoHistorico) {
-        this.pedidoHistorico = pedidoHistorico;
     }
 
     public Integer getQuantidadePedido() {
@@ -77,6 +71,22 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
+    public Integer getIdPedidoHistorico() {
+        return idPedidoHistorico;
+    }
+
+    public void setIdPedidoHistorico(Integer idPedidoHistorico) {
+        this.idPedidoHistorico = idPedidoHistorico;
+    }
+
+    public Date getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" +
@@ -86,7 +96,8 @@ public class Pedido {
                 ", quantidadePedido=" + quantidadePedido +
                 ", valorPedido=" + valorPedido +
                 ", observacaoPedido='" + observacaoPedido + '\'' +
-                ", pedidoHistorico=" + pedidoHistorico +
+                ", idPedidoHistorico=" + idPedidoHistorico +
+                ", dataPedido=" + dataPedido +
                 ", valorTotal=" + valorTotal +
                 '}';
     }

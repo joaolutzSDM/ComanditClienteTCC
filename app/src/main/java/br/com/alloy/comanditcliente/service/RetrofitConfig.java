@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitConfig {
 
     private static ComanditClientAPI comanditClientAPI;
-    private static final String BASE_URL = "http://NOTE-ACER:3312/comandit/cliente/api/";
+    private static final String BASE_URL = "http://WORKSTATION:3312/comandit/cliente/api/";
 
     public static ComanditClientAPI getComanditAPI() {
         if(comanditClientAPI == null) {
