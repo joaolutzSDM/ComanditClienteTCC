@@ -53,5 +53,7 @@
     <string name="cardapio_produto_indisponivel">Indisponível</string>
     <string name="invalid_qrcode">QR Code inválido</string>
     <string name="categorias">Categorias</string>
+    <string name="labelitemconta">LabelItemConta</string>
+    <string name="valueitemconta">ValueItemConta</string>
 
 </resources>

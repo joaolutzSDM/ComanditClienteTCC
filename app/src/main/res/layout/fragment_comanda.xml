@@ -121,89 +121,10 @@
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="bottom">
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_conta"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@drawable/account_background">
-
-                        <GridLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:rowCount="6">
-
-                            <TextView android:layout_row="0"
-                                android:layout_column="0"
-                                style="@style/dadosConta"
-                                android:text="@string/quantidade_pedidos"/>
-
-                            <TextView android:id="@+id/quantidade_pedidos"
-                                android:layout_row="0"
-                                android:layout_column="1"
-                                android:layout_gravity="end"
-                                style="@style/dadosConta" />
-
-                            <TextView android:layout_row="1"
-                                android:layout_column="0"
-                                style="@style/dadosConta"
-                                android:text="@string/taxa_servico"/>
-
-                            <TextView android:id="@+id/taxa_servico"
-                                android:layout_row="1"
-                                android:layout_column="1"
-                                android:layout_gravity="end"
-                                style="@style/dadosConta" />
-
-                            <TextView android:layout_row="2"
-                                android:layout_column="0"
-                                style="@style/dadosConta"
-                                android:text="@string/valor_pedidos"/>
-
-                            <TextView android:id="@+id/valor_pedidos"
-                                android:layout_row="2"
-                                android:layout_column="1"
-                                android:layout_gravity="end"
-                                style="@style/dadosConta" />
-
-                            <TextView android:layout_row="3"
-                                android:layout_column="0"
-                                style="@style/dadosConta"
-                                android:text="@string/valor_servico"/>
-
-                            <TextView android:id="@+id/valor_servico"
-                                android:layout_row="3"
-                                android:layout_column="1"
-                                android:layout_gravity="end"
-                                style="@style/dadosConta" />
-
-                            <TextView android:layout_row="4"
-                                android:layout_column="0"
-                                style="@style/dadosConta"
-                                android:text="@string/valor_couvert"/>
-
-                            <TextView android:id="@+id/valor_couvert"
-                                android:layout_row="4"
-                                android:layout_column="1"
-                                android:layout_gravity="end"
-                                style="@style/dadosConta" />
-
-                            <TextView android:layout_row="5"
-                                android:layout_column="0"
-                                style="@style/dadosConta"
-                                android:textStyle="bold"
-                                android:text="@string/valor_total"/>
-
-                            <TextView android:id="@+id/valor_total"
-                                android:layout_row="5"
-                                android:layout_column="1"
-                                android:layout_gravity="end"
-                                style="@style/dadosConta"
-                                android:textStyle="bold" />
-
-                        </GridLayout>
-
-                    </LinearLayout>
+                        android:layout_height="match_parent" />
 
                 </androidx.cardview.widget.CardView>
 

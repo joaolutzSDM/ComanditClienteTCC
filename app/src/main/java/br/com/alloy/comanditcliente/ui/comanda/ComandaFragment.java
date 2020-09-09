@@ -71,13 +71,7 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
         });
         //dados da conta
         comandaViewModel.getConta().observe(getViewLifecycleOwner(), conta -> {
-            binding.quantidadePedidos.setText(String.format("%d", conta.getQtdItens()));
-            binding.taxaServico.setText(String.format("%d%%", conta.getTaxaServico()));
-            //valores
-            binding.valorPedidos.setText(StringUtil.formatCurrencyValue(conta.getValorPedidos()));
-            binding.valorServico.setText(StringUtil.formatCurrencyValue(conta.getValorServico()));
-            binding.valorCouvert.setText(StringUtil.formatCurrencyValue(conta.getValorCouvert()));
-            binding.valorTotal.setText(StringUtil.formatCurrencyValue(conta.getValorTotal()));
+            binding.recyclerViewConta.setAdapter(new ContaAdapter(conta.getItens()));
         });
         //setting loadData as the method for the swipe down refresh layout
         binding.swipeRefreshComanda.setOnRefreshListener(this::carregarDadosComanda);
