@@ -13,13 +13,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
-import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.ui.comanda.ComandaViewModel;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static RetrofitConfig retrofitConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
