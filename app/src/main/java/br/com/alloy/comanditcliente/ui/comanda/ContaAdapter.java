@@ -1,5 +1,6 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -31,6 +32,10 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaHolder>
         ItemConta item = itens.get(position);
         holder.binding.itemLabel.setText(item.getLabel());
         holder.binding.itemValue.setText(item.getValue());
+        if(item.getLabel().equals("Valor total")) {
+            holder.binding.itemLabel.setTypeface(null, Typeface.BOLD);
+            holder.binding.itemValue.setTypeface(null, Typeface.BOLD);
+        }
     }
 
     @Override
