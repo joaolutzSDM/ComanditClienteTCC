@@ -1,7 +1,5 @@
 package br.com.alloy.comanditcliente.ui.cardapio;
 
-import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;

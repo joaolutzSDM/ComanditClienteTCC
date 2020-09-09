@@ -20,7 +20,6 @@ import br.com.alloy.comanditcliente.databinding.FragmentPedidosBinding;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
-import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Pedido;
 import br.com.alloy.comanditcliente.ui.comanda.ComandaViewModel;
 import retrofit2.Call;

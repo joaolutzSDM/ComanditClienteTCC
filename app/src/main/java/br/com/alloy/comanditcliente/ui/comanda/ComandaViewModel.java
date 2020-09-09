@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Date;
-
 import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
 

@@ -1,10 +1,6 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
 import android.annotation.SuppressLint;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,11 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -32,9 +23,7 @@ import br.com.alloy.comanditcliente.databinding.FragmentComandaBinding;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
-import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.Conta;
-import br.com.alloy.comanditcliente.ui.util.StringUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

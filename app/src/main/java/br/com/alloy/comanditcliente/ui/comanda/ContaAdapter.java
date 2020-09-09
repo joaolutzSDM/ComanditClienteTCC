@@ -1,20 +1,15 @@
 package br.com.alloy.comanditcliente.ui.comanda;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Locale;
 
 import br.com.alloy.comanditcliente.databinding.ItemContaBinding;
-import br.com.alloy.comanditcliente.databinding.ItemPedidoBinding;
 import br.com.alloy.comanditcliente.service.model.ItemConta;
-import br.com.alloy.comanditcliente.service.model.Pedido;
-import br.com.alloy.comanditcliente.ui.pedidos.PedidoAdapter;
 
 public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaHolder> {
 
