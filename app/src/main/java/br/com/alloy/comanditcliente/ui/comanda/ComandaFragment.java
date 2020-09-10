@@ -55,7 +55,7 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
         comandaViewModel.getComanda().observe(getViewLifecycleOwner(), c -> {
             binding.numeroComanda.setText(String.format("%d", c.getIdComanda()));
             binding.numeroMesa.setText(String.format("%d", c.getNumeroMesa()));
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
             binding.horaAbertura.setText(sdf.format(c.getHoraAlteracao()));
         });
         //dados da conta
