@@ -103,7 +103,16 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
                 String qrCode = result.getContents();
                 if(qrCode.contains("Comandit")) {
                     String[] comanda = qrCode.split("-",3);
-                    doLogin(comanda[1], comanda[2]);
+                    if(comanda.length == 3) {
+                        try {
+                            Integer.parseInt(comanda[1]);
+                            doLogin(comanda[1], comanda[2]);
+                        } catch(NumberFormatException ex) {
+                            Toast.makeText(this, R.string.invalid_qrcode, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, R.string.invalid_qrcode, Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(this, R.string.invalid_qrcode, Toast.LENGTH_SHORT).show();
                 }
