@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_comanda, R.id.navigation_pedidos, R.id.navigation_cardapio)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //Removido método que sincronizava o bottomNavigation com o ActionBar do aplicativo
+        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
