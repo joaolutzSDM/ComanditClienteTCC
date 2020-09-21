@@ -124,11 +124,11 @@ public class CardapioAdapter extends BaseExpandableListAdapter {
         }
         if(produto.getDisponivel()) {
             binding.valorStatus.setText(StringUtil.formatCurrencyValue(produto.getValorProduto()));
-            binding.valorStatus.setTypeface(null, Typeface.NORMAL);
+            binding.valorStatus.setTypeface(binding.valorStatus.getTypeface(), Typeface.NORMAL);
             binding.valorStatus.setTextColor(Color.GRAY);
         } else {
             binding.valorStatus.setText(R.string.cardapio_produto_indisponivel);
-            binding.valorStatus.setTypeface(null, Typeface.BOLD_ITALIC);
+            binding.valorStatus.setTypeface(binding.valorStatus.getTypeface(), Typeface.BOLD_ITALIC);
             binding.valorStatus.setTextColor(Color.MAGENTA);
         }
         //TODO Rever forma de carregamento das imagens dos produtos

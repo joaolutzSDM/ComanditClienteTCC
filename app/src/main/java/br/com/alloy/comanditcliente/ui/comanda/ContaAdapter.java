@@ -33,8 +33,8 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaHolder>
         holder.binding.itemLabel.setText(item.getLabel());
         holder.binding.itemValue.setText(item.getValue());
         if(item.getLabel().equals("Valor total")) {
-            holder.binding.itemLabel.setTypeface(null, Typeface.BOLD);
-            holder.binding.itemValue.setTypeface(null, Typeface.BOLD);
+            holder.binding.itemLabel.setTypeface(holder.binding.itemLabel.getTypeface(), Typeface.BOLD);
+            holder.binding.itemValue.setTypeface(holder.binding.itemValue.getTypeface(), Typeface.BOLD);
         }
     }
 

@@ -54,7 +54,7 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="30dp"
                                 android:layout_gravity="end"
-                                android:text="001"
+                                android:text="@string/numero_comanda"
                                 android:textAppearance="@style/numeroComanda"
                                 android:textAlignment="viewEnd" />
 
@@ -65,7 +65,7 @@
                                 android:layout_gravity="end"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="8dp"
-                                android:text="Mesa 1"
+                                android:text="@string/numero_mesa"
                                 android:textAppearance="@style/dadosComanda"
                                 android:textAlignment="viewEnd" />
 
@@ -87,7 +87,7 @@
                                 android:layout_gravity="end"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="8dp"
-                                android:text="16/07/20 20:00"
+                                android:text="@string/data_hora_abertura_comanda"
                                 android:textAppearance="@style/dadosComanda"
                                 android:textAlignment="viewEnd"/>
 
@@ -102,9 +102,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="18dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/minha_conta"
+                    android:text="@string/sua_conta"
                     android:gravity="center"
                     android:textAppearance="@style/tituloConta"
                     app:layout_constraintEnd_toEndOf="parent"
