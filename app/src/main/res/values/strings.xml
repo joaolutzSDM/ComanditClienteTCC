@@ -22,7 +22,7 @@
     <string name="invalid_comanda">Comanda inválida</string>
     <string name="invalid_password">Senha inválida</string>
     <string name="login_failed">"Login falhou"</string>
-    <string name="login_qr_code">Login QR Code</string>
+    <string name="login_qr_code">Entrar com QR Code</string>
     <string name="informativo_login">Solicite sua senha de acesso ou seu QR code a um atendente</string>
     <string name="qrcode">QRCode</string>
     <string name="qrcode_scan_prompt">Escaneie seu QR Code</string>

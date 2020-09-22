@@ -5,7 +5,11 @@
     <item android:state_enabled="true">
         <shape android:shape="rectangle">
             <corners android:radius="100dp" />
-            <gradient android:angle="270" android:endColor="#00473D" android:startColor="#01A392" android:type="linear" />
+            <gradient
+                android:angle="270"
+                android:startColor="@color/colorPrimary"
+                android:endColor="@color/colorPrimaryDark"
+                android:type="linear" />
         </shape>
     </item>
 </selector>
