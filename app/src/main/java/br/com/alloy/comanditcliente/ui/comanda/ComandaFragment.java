@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ComandaFragment extends Fragment implements Callback<Conta> {
+public class ComandaFragment extends Fragment {
 
     private FragmentComandaBinding binding;
     private ComandaViewModel comandaViewModel;
@@ -67,9 +67,29 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
     }
 
     private void carregarDadosComanda() {
-        //TODO Remove this in PROD (Mock)
         RetrofitConfig.getComanditAPI().consultarContaComanda(
-                comandaViewModel.getComandaForRequest()).enqueue(this);
+                comandaViewModel.getComandaForRequest()).enqueue(new Callback<Conta>() {
+            @Override
+            public void onResponse(Call<Conta> call, Response<Conta> response) {
+                cancelRefresh();
+                if(response.isSuccessful()) {
+                    Conta conta = response.body();
+                    assert conta != null;
+                    comandaViewModel.setComanda(conta.getComanda());
+                    comandaViewModel.setConta(conta);
+                } else {
+                    APIException exception = ExceptionUtils.parseException(response);
+                    Log.e(getString(R.string.api_exception), exception.getMessage());
+                    Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Conta> call, Throwable t) {
+                cancelRefresh();
+                Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void carregarLogoCliente() {
@@ -84,27 +104,6 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    @Override
-    public void onResponse(Call<Conta> call, Response<Conta> response) {
-        cancelRefresh();
-        if(response.isSuccessful()) {
-            Conta conta = response.body();
-            assert conta != null;
-            comandaViewModel.setComanda(conta.getComanda());
-            comandaViewModel.setConta(conta);
-        } else {
-            APIException exception = ExceptionUtils.parseException(response);
-            Log.e(getString(R.string.api_exception), exception.getMessage());
-            Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onFailure(Call<Conta> call, Throwable t) {
-        cancelRefresh();
-        Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
     }
 
     private void cancelRefresh() {

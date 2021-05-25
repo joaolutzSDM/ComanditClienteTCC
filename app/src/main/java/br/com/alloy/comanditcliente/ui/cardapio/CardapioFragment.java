@@ -16,15 +16,23 @@ import java.util.List;
 
 import br.com.alloy.comanditcliente.R;
 import br.com.alloy.comanditcliente.databinding.FragmentCardapioBinding;
+import br.com.alloy.comanditcliente.service.ExceptionUtils;
+import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
+import br.com.alloy.comanditcliente.service.model.ComandaMensagem;
 import br.com.alloy.comanditcliente.service.model.Produto;
 import br.com.alloy.comanditcliente.service.model.ProdutoCategoria;
+import br.com.alloy.comanditcliente.ui.comanda.ComandaViewModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CardapioFragment extends Fragment implements CardapioResponseListener {
 
     private FragmentCardapioBinding binding;
     private CardapioViewModel cardapioViewModel;
     private CardapioRepository cardapioRepository;
+    private ComandaViewModel comandaViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +44,7 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cardapioViewModel = new ViewModelProvider(this).get(CardapioViewModel.class);
+        comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
         cardapioRepository = new CardapioRepository(this);
         setViewModelObserversAndListeners();
         binding.swipeRefreshCardapio.setRefreshing(true);
@@ -50,7 +59,7 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
         cardapioViewModel.getCategorias().observe(getViewLifecycleOwner(), categorias -> {
             binding.expandableListviewCardapio.setAdapter(new CardapioAdapter(categorias));
         });
-
+        binding.fabChamarAtendente.setOnClickListener(v -> chamarAtendente());
         cardapioViewModel.getProdutos().observe(getViewLifecycleOwner(), produtos -> {
             if(!produtos.isEmpty()) {
                 getCardapioAdapter().updateProdutos(produtos.get(0).getIdProdutoCategoria(), produtos);
@@ -73,6 +82,24 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
             return false;
         });
         binding.swipeRefreshCardapio.setOnRefreshListener(this::carregarCategorias);
+    }
+
+    private void chamarAtendente() {
+        RetrofitConfig.getComanditAPI().chamarAtendente(comandaViewModel.getComandaForRequest()).enqueue(new Callback<ComandaMensagem>() {
+            @Override
+            public void onResponse(Call<ComandaMensagem> call, Response<ComandaMensagem> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getContext(), R.string.chamado_atendente_registrado, Toast.LENGTH_SHORT).show();
+                } else {
+                    onAPIException(ExceptionUtils.parseException(response));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ComandaMensagem> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void carregarCategorias() {

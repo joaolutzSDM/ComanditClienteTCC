@@ -26,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PedidosFragment extends Fragment implements Callback<List<Pedido>> {
+public class PedidosFragment extends Fragment {
 
     private FragmentPedidosBinding binding;
     private PedidosViewModel pedidosViewModel;
@@ -61,30 +61,32 @@ public class PedidosFragment extends Fragment implements Callback<List<Pedido>> 
     }
 
     private void carregarPedidos() {
-        RetrofitConfig.getComanditAPI().consultarPedidosComanda(comandaViewModel.getComandaForRequest()).enqueue(this);
+        RetrofitConfig.getComanditAPI().consultarPedidosComanda(comandaViewModel.getComandaForRequest()).enqueue(new Callback<List<Pedido>>() {
+            @Override
+            public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
+                cancelRefresh();
+                if(response.isSuccessful()) {
+                    List<Pedido> pedidos = response.body();
+                    pedidosViewModel.setPedidos(pedidos);
+                } else {
+                    APIException exception = ExceptionUtils.parseException(response);
+                    Log.e(getString(R.string.api_exception), exception.getMessage());
+                    Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Pedido>> call, Throwable t) {
+                cancelRefresh();
+                Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
-    public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
-        if(binding.swipeRefreshPedidos.isRefreshing()) {
+    private void cancelRefresh() {
+        if (binding.swipeRefreshPedidos.isRefreshing()) {
             binding.swipeRefreshPedidos.setRefreshing(false);
         }
-        if(response.isSuccessful()) {
-            List<Pedido> pedidos = response.body();
-            pedidosViewModel.setPedidos(pedidos);
-        } else {
-            APIException exception = ExceptionUtils.parseException(response);
-            Log.e(getString(R.string.api_exception), exception.getMessage());
-            Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onFailure(Call<List<Pedido>> call, Throwable t) {
-        if(binding.swipeRefreshPedidos.isRefreshing()) {
-            binding.swipeRefreshPedidos.setRefreshing(false);
-        }
-        Toast.makeText(getContext(), R.string.requestError, Toast.LENGTH_SHORT).show();
     }
 
 }

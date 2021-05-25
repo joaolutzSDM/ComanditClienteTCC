@@ -59,5 +59,6 @@
     <string name="numero_mesa">Mesa 1</string>
     <string name="numero_comanda">001</string>
     <string name="chamar_atendente_icon">Chamar atendente</string>
+    <string name="chamado_atendente_registrado">Chamado ao atendente registrado</string>
 
 </resources>
