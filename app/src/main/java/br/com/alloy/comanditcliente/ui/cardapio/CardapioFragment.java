@@ -29,14 +29,14 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCardapioBinding.inflate(inflater, container, false);
-        cardapioViewModel = new ViewModelProvider(this).get(CardapioViewModel.class);
-        cardapioRepository = new CardapioRepository(this);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        cardapioViewModel = new ViewModelProvider(this).get(CardapioViewModel.class);
+        cardapioRepository = new CardapioRepository(this);
         setViewModelObserversAndListeners();
         binding.swipeRefreshCardapio.setRefreshing(true);
         carregarCategorias();

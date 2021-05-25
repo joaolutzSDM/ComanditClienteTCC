@@ -36,13 +36,13 @@ public class ComandaFragment extends Fragment implements Callback<Conta> {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentComandaBinding.inflate(inflater, container, false);
-        comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
         setViewModelObserversAndListeners();
         binding.swipeRefreshComanda.setRefreshing(true);
         carregarLogoCliente();

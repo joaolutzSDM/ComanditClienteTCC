@@ -35,14 +35,14 @@ public class PedidosFragment extends Fragment implements Callback<List<Pedido>> 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPedidosBinding.inflate(inflater, container, false);
-        pedidosViewModel = new ViewModelProvider(this).get(PedidosViewModel.class);
-        comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        pedidosViewModel = new ViewModelProvider(this).get(PedidosViewModel.class);
+        comandaViewModel = new ViewModelProvider(requireActivity()).get(ComandaViewModel.class);
         setViewModelObserversAndListeners();
         //carrega os pedidos
         binding.swipeRefreshPedidos.setRefreshing(true);

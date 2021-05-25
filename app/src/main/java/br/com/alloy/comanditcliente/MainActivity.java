@@ -5,8 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.Objects;
@@ -26,10 +25,9 @@ public class MainActivity extends AppCompatActivity {
         ComandaViewModel comandaViewModel = new ViewModelProvider(this).get(ComandaViewModel.class);
         Comanda comanda = (Comanda) Objects.requireNonNull(getIntent().getExtras()).getSerializable("comanda");
         comandaViewModel.setComanda(comanda);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_comanda, R.id.navigation_pedidos, R.id.navigation_cardapio)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
         //Removido método que sincronizava o bottomNavigation com o ActionBar do aplicativo
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
