@@ -68,7 +68,6 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
                 Toast.makeText(getContext(), R.string.no_products, Toast.LENGTH_SHORT).show();
             }
         });
-
         binding.expandableListviewCardapio.setOnGroupClickListener((parent, v, groupPosition, id) -> {
             if(!parent.isGroupExpanded(groupPosition)) {
                 if (!getCardapioAdapter().getProdutos().containsKey((int) getCardapioAdapter().getGroupId(groupPosition))) {
