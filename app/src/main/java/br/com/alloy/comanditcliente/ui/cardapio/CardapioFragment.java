@@ -19,6 +19,7 @@ import br.com.alloy.comanditcliente.databinding.FragmentCardapioBinding;
 import br.com.alloy.comanditcliente.service.ExceptionUtils;
 import br.com.alloy.comanditcliente.service.RetrofitConfig;
 import br.com.alloy.comanditcliente.service.dto.APIException;
+import br.com.alloy.comanditcliente.service.model.Comanda;
 import br.com.alloy.comanditcliente.service.model.ComandaMensagem;
 import br.com.alloy.comanditcliente.service.model.Produto;
 import br.com.alloy.comanditcliente.service.model.ProdutoCategoria;
@@ -84,7 +85,7 @@ public class CardapioFragment extends Fragment implements CardapioResponseListen
     }
 
     private void chamarAtendente() {
-        RetrofitConfig.getComanditAPI().chamarAtendente(comandaViewModel.getComandaForRequest()).enqueue(new Callback<ComandaMensagem>() {
+        RetrofitConfig.getComanditAPI().chamarAtendente(comandaViewModel.getComandaForRequestComMesa()).enqueue(new Callback<ComandaMensagem>() {
             @Override
             public void onResponse(Call<ComandaMensagem> call, Response<ComandaMensagem> response) {
                 if (response.isSuccessful()) {

@@ -25,6 +25,11 @@ public class ComandaViewModel extends ViewModel {
         return new Comanda(getComandaValue().getIdComanda(), getComandaValue().getSenhaAcessoMobile());
     }
 
+    public Comanda getComandaForRequestComMesa() {
+        return new Comanda(getComandaValue().getIdComanda(), getComandaValue().getNumeroMesa(),
+                getComandaValue().getSenhaAcessoMobile());
+    }
+
     public Comanda getComandaValue() {
         return comanda.getValue();
     }
