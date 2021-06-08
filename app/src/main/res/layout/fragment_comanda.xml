@@ -40,7 +40,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_client_placeholder"
+                            app:srcCompat="@drawable/ic_client_placeholder"
                             android:contentDescription="@string/logo_cliente" />
 
                         <LinearLayout

@@ -42,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements Callback<Comanda
     }
 
     private void setObserversAndListeners() {
+        binding.login.setOnClickListener(this::onLoginClick);
+        binding.loginQrcode.setOnClickListener(this::qrCodeLogin);
         loginViewModel.getLoginFormState().observe(this, loginFormState -> {
             if (loginFormState == null) {
                 return;

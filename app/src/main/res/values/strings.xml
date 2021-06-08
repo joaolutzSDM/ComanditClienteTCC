@@ -25,7 +25,7 @@
     <string name="login_qr_code">Entrar com QR Code</string>
     <string name="informativo_login">Solicite sua senha de acesso ou seu QR code a um atendente</string>
     <string name="qrcode">QRCode</string>
-    <string name="qrcode_scan_prompt">Utilize o botão de volume para ativar o flash (+ ON/- OFF)</string>
+    <string name="qrcode_scan_prompt">Utilize o botão de volume para ativar o flash (+ Lig. | - Desl.)</string>
 
     <!--    Tela Comanda    -->
 <!--    <string name="client_logo_url">http://note-acer:3312/comandit/cliente/api/client_logo.jpg</string>-->
